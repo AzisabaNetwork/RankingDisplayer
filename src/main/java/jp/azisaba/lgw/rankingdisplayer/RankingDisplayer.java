@@ -18,8 +18,6 @@ public class RankingDisplayer extends JavaPlugin {
 		RankingDisplayer.config = new PluginConfig(this);
 		RankingDisplayer.config.loadConfig();
 
-		RankingHideManager.init(this);
-
 		this.listener = new DisplayListener(this);
 		Bukkit.getPluginManager().registerEvents(this.listener, this);
 
@@ -39,9 +37,6 @@ public class RankingDisplayer extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-
-		RankingHideManager.save();
-
 		if (this.listener != null) {
 			listener.removeAllBoards();
 		}
