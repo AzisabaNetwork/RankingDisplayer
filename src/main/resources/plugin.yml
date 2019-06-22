@@ -1,0 +1,12 @@
+name: ${project.name}
+main: jp.azisaba.lgw.rankingdisplayer.RankingDisplayer
+version: ${project.version}
+author: siloneco
+description: "Display kill ranking plugin"
+commands:
+  ranking:
+    usage: /ranking
+    permission: rankingdisplayer.command.ranking
+permissions:
+  rankingdisplayer.command.ranking:
+    default: true
