@@ -1,7 +1,11 @@
 package jp.azisaba.lgw.rankingdisplayer;
 
+import java.io.File;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +18,8 @@ public class RankingDisplayer extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+
+		convertSettingsFromLocalFile();
 
 		RankingDisplayer.config = new PluginConfig(this);
 		RankingDisplayer.config.loadConfig();
@@ -54,5 +60,33 @@ public class RankingDisplayer extends JavaPlugin {
 
 	public static PluginConfig getPluginConfig() {
 		return config;
+	}
+
+	private void convertSettingsFromLocalFile() {
+		File file = new File(getDataFolder(), "HideFromRanking.yml");
+
+		if (!file.exists()) {
+			return;
+		}
+
+		YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
+
+		if (conf.getConfigurationSection("") == null || conf.getConfigurationSection("").getKeys(false) == null) {
+			return;
+		}
+
+		for (String key : conf.getConfigurationSection("").getKeys(false)) {
+			UUID uuid = null;
+			try {
+				uuid = UUID.fromString(key);
+			} catch (Exception e) {
+				Bukkit.getLogger().warning("Could not parse String \"" + key + "\"");
+				continue;
+			}
+
+			RankingHideManager.setHiding(uuid, true);
+		}
+
+		file.delete();
 	}
 }
