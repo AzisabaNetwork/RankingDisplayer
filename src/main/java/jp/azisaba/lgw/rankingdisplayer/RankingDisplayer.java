@@ -13,80 +13,81 @@ import net.md_5.bungee.api.ChatColor;
 
 public class RankingDisplayer extends JavaPlugin {
 
-	private static PluginConfig config;
-	private DisplayListener listener;
+    private static PluginConfig config;
+    private DisplayListener listener;
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		convertSettingsFromLocalFile();
+        convertSettingsFromLocalFile();
 
-		RankingDisplayer.config = new PluginConfig(this);
-		RankingDisplayer.config.loadConfig();
+        RankingDisplayer.config = new PluginConfig(this);
+        RankingDisplayer.config.loadConfig();
 
-		this.listener = new DisplayListener(this);
-		Bukkit.getPluginManager().registerEvents(this.listener, this);
+        listener = new DisplayListener(this);
+        Bukkit.getPluginManager().registerEvents(listener, this);
 
-		Bukkit.getPluginCommand("ranking").setExecutor(new RankingCommand());
-		Bukkit.getPluginCommand("ranking").setPermissionMessage(ChatColor.RED + "権限がありません！");
+        Bukkit.getPluginCommand("ranking").setExecutor(new RankingCommand());
+        Bukkit.getPluginCommand("ranking").setPermissionMessage(ChatColor.RED + "権限がありません！");
 
-		if (Bukkit.getOnlinePlayers().size() > 0) {
-			for (Player p : Bukkit.getOnlinePlayers()) {
-				World world = p.getWorld();
-				if (world == config.displayLocation.getWorld())
-					listener.displayRankingForPlayerAsync(p, false);
-			}
-		}
+        if ( Bukkit.getOnlinePlayers().size() > 0 ) {
+            for ( Player p : Bukkit.getOnlinePlayers() ) {
+                World world = p.getWorld();
+                if ( world == config.displayLocation.getWorld() ) {
+                    listener.displayRankingForPlayerAsync(p, false);
+                }
+            }
+        }
 
-		Bukkit.getLogger().info(getName() + " enabled.");
-	}
+        Bukkit.getLogger().info(getName() + " enabled.");
+    }
 
-	@Override
-	public void onDisable() {
-		if (this.listener != null) {
-			listener.removeAllBoards();
-		}
+    @Override
+    public void onDisable() {
+        if ( listener != null ) {
+            listener.removeAllBoards();
+        }
 
-		Bukkit.getLogger().info(getName() + " disabled.");
-	}
+        Bukkit.getLogger().info(getName() + " disabled.");
+    }
 
-	public void reloadPluginConfig() {
+    public void reloadPluginConfig() {
 
-		this.reloadConfig();
+        reloadConfig();
 
-		RankingDisplayer.config = new PluginConfig(this);
-		RankingDisplayer.config.loadConfig();
-	}
+        RankingDisplayer.config = new PluginConfig(this);
+        RankingDisplayer.config.loadConfig();
+    }
 
-	public static PluginConfig getPluginConfig() {
-		return config;
-	}
+    public static PluginConfig getPluginConfig() {
+        return config;
+    }
 
-	private void convertSettingsFromLocalFile() {
-		File file = new File(getDataFolder(), "HideFromRanking.yml");
+    private void convertSettingsFromLocalFile() {
+        File file = new File(getDataFolder(), "HideFromRanking.yml");
 
-		if (!file.exists()) {
-			return;
-		}
+        if ( !file.exists() ) {
+            return;
+        }
 
-		YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
+        YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
 
-		if (conf.getConfigurationSection("") == null || conf.getConfigurationSection("").getKeys(false) == null) {
-			return;
-		}
+        if ( conf.getConfigurationSection("") == null || conf.getConfigurationSection("").getKeys(false) == null ) {
+            return;
+        }
 
-		for (String key : conf.getConfigurationSection("").getKeys(false)) {
-			UUID uuid = null;
-			try {
-				uuid = UUID.fromString(key);
-			} catch (Exception e) {
-				Bukkit.getLogger().warning("Could not parse String \"" + key + "\"");
-				continue;
-			}
+        for ( String key : conf.getConfigurationSection("").getKeys(false) ) {
+            UUID uuid = null;
+            try {
+                uuid = UUID.fromString(key);
+            } catch ( Exception e ) {
+                Bukkit.getLogger().warning("Could not parse String \"" + key + "\"");
+                continue;
+            }
 
-			RankingHideManager.setHiding(uuid, true);
-		}
+            RankingHideManager.setHiding(uuid, true);
+        }
 
-		file.delete();
-	}
+        file.delete();
+    }
 }
