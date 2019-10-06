@@ -3,7 +3,7 @@ main: jp.azisaba.lgw.rankingdisplayer.RankingDisplayer
 version: ${project.version}
 author: siloneco
 description: "Display kill ranking plugin"
-depend: ["PlayerSettings"]
+depend: ["PlayerSettings", "KDStatusReloaded"]
 commands:
   ranking:
     usage: /ranking
