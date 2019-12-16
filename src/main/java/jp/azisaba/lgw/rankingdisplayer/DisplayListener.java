@@ -182,6 +182,12 @@ public class DisplayListener implements Listener {
 
             holo.setLine(0, HEADER);
 
+            long waitingSynchro = System.currentTimeMillis();
+            long rankingDataFetchTime = updateData(type, ignoreCache);
+            long endedSynchro = System.currentTimeMillis();
+
+            setRankingData(holo, p, dataMap.get(type), type.getKdStatusTimeUnit());
+
             String formattedLastUpdated = null;
 
             // KDStatusReloadedがない場合は取得
@@ -203,11 +209,6 @@ public class DisplayListener implements Listener {
 
             holo.addLine(ChatColor.RED + "ランキング最終更新: " + ChatColor.GREEN + formattedLastUpdated);
 
-            long waitingSynchro = System.currentTimeMillis();
-            long rankingDataFetchTime = updateData(type, ignoreCache);
-            long endedSynchro = System.currentTimeMillis();
-
-            setRankingData(holo, p, dataMap.get(type), type.getKdStatusTimeUnit());
             holo.addLine(getFooter(type));
             holo.setLocation(holo.getLocation().subtract(0, 2, 0));
             holo.update(p);
