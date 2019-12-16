@@ -2,6 +2,7 @@ package jp.azisaba.lgw.rankingdisplayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -180,6 +181,27 @@ public class DisplayListener implements Listener {
             long start = System.currentTimeMillis();
 
             holo.setLine(0, HEADER);
+
+            String formattedLastUpdated = null;
+
+            // KDStatusReloadedがない場合は取得
+            if ( kdsPlugin == null ) {
+                // 取得し、失敗したら不明とする
+                if ( !getKDSPlugin() ) {
+                    formattedLastUpdated = "不明";
+                }
+            }
+
+            if ( kdsPlugin != null ) {
+                long updatedBefore = System.currentTimeMillis() - kdsPlugin.getSaveTask().getLastSavedTime();
+                if ( updatedBefore + (1000 * 5) > System.currentTimeMillis() ) {
+                    formattedLastUpdated = "今";
+                } else {
+                    formattedLastUpdated = DateFormatUtils.format(new Date(updatedBefore)) + "前";
+                }
+            }
+
+            holo.addLine(ChatColor.RED + "ランキング最終更新: " + ChatColor.GREEN + formattedLastUpdated);
 
             long waitingSynchro = System.currentTimeMillis();
             long rankingDataFetchTime = updateData(type, ignoreCache);
