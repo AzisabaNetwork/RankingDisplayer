@@ -46,7 +46,7 @@
     </repository>
     <repository>
       <id>rayzr-repo</id>
-      <url>https://cdn.rawgit.com/Rayzr522/maven-repo/master/</url>
+      <url>https://raw.githubusercontent.com/Rayzr522/maven-repo/master/</url>
     </repository>
     <repository>
       <id>sk89q-repo</id>
@@ -54,7 +54,7 @@
     </repository>
     <repository>
       <id>azisaba-repo</id>
-      <url>https://repo.azisaba.net/</url>
+      <url>https://mvn-repo.azisaba.net/</url>
     </repository>
   </repositories>
 
