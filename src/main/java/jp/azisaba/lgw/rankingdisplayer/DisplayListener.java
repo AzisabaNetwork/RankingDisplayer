@@ -205,12 +205,6 @@ public class DisplayListener implements Listener {
             plugin.getLogger().info("Displayed " + type.toString() + " Ranking for " + p.getName() + " async ("
                     + (end - start - (endedSynchro - waitingSynchro) + rankingDataFetchTime) + "ms)");
 
-            try {
-                Thread.sleep(1000 * 5);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 processingPlayers.remove(p);
             }, 0);
