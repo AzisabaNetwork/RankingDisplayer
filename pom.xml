@@ -53,8 +53,8 @@
       <url>https://maven.sk89q.com/repo/</url>
     </repository>
     <repository>
-      <id>azisaba-repo</id>
-      <url>https://mvn-repo.azisaba.net/</url>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io/</url>
     </repository>
   </repositories>
 
@@ -70,12 +70,12 @@
       <version>1.18.8</version>
     </dependency>
     <dependency>
-      <groupId>net.azisaba</groupId>
+      <groupId>com.github.AzisabaNetwork</groupId>
       <artifactId>PlayerSettings</artifactId>
       <version>1.0.0</version>
     </dependency>
     <dependency>
-      <groupId>net.azisaba</groupId>
+      <groupId>com.github.AzisabaNetwork</groupId>
       <artifactId>KDStatusReloaded</artifactId>
       <version>1.2.0</version>
     </dependency>
