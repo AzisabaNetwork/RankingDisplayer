@@ -77,7 +77,7 @@
     <dependency>
       <groupId>com.github.AzisabaNetwork</groupId>
       <artifactId>KDStatusReloaded</artifactId>
-      <version>master</version>
+      <version>1.2.1</version>
     </dependency>
   </dependencies>
 </project>
