@@ -1,9 +1,10 @@
 name: ${project.name}
-main: jp.azisaba.lgw.rankingdisplayer.RankingDisplayer
+main: jp.azisaba.lgw.rankingdisplayer.ranking.RankingDisplayer
 version: ${project.version}
 author: siloneco
+api-version: 1.16
 description: "Display kill ranking plugin"
-depend: ["PlayerSettings", "KDStatusReloaded"]
+depend: ["PlayerSettings", "KDStatusReloaded", "DecentHolograms"]
 commands:
   ranking:
     usage: /ranking
