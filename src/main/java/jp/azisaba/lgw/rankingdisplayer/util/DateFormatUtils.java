@@ -1,4 +1,4 @@
-package jp.azisaba.lgw.rankingdisplayer;
+package jp.azisaba.lgw.rankingdisplayer.util;
 
 import java.util.Calendar;
 import java.util.Date;

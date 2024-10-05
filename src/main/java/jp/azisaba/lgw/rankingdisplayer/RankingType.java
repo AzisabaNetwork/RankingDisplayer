@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import jp.azisaba.lgw.kdstatus.utils.TimeUnit;
 
 @RequiredArgsConstructor
-public enum DisplayType {
+public enum RankingType {
 
     DAILY(TimeUnit.DAILY, "Daily"),
     MONTHLY(TimeUnit.MONTHLY, "Monthly"),

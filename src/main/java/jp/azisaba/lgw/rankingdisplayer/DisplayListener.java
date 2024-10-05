@@ -4,6 +4,9 @@ import com.google.common.base.Strings;
 import jp.azisaba.lgw.kdstatus.KDStatusReloaded;
 import jp.azisaba.lgw.kdstatus.sql.KillRankingData;
 import jp.azisaba.lgw.kdstatus.utils.TimeUnit;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingDisplayer;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
+import jp.azisaba.lgw.rankingdisplayer.util.DateFormatUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.*;
@@ -26,8 +29,8 @@ public class DisplayListener implements Listener {
     private final RankingDisplayer plugin;
     private KDStatusReloaded kdsPlugin;
 
-    private HashMap<DisplayType, List<KillRankingData>> dataMap = new HashMap<>();
-    private HashMap<DisplayType, Long> lastUpdated = new HashMap<>();
+    private final HashMap<RankingType, List<KillRankingData>> dataMap = new HashMap<>();
+    private final HashMap<RankingType, Long> lastUpdated = new HashMap<>();
 
     private final long cacheHoldMilliSec = 1000 * 10;
 
@@ -35,7 +38,7 @@ public class DisplayListener implements Listener {
             + "Kill Ranking " + ChatColor.AQUA + Strings.repeat("=", 8);
 
     private final HashMap<Player, Long> updatedTime = new HashMap<>();
-    private final HashMap<Player, DisplayType> displayTypeMap = new HashMap<>();
+    private final HashMap<Player, RankingType> displayTypeMap = new HashMap<>();
     private final List<Player> processingPlayers = new ArrayList<>();
 
     private final HashMap<Player, Hologram> holoMap = new HashMap<>();
@@ -94,7 +97,7 @@ public class DisplayListener implements Listener {
         if (clickedLoc.distance(displayLoc) <= 2 && isYArea) {
             displayTypeMap.put(p, getNext(displayTypeMap.getOrDefault(p, null)));
 
-            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_HAT, 1, 1);
+            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
 
             processingPlayers.add(p);
             displayRankingForPlayerAsync(p, false);
@@ -159,10 +162,10 @@ public class DisplayListener implements Listener {
         Hologram holo = Hologram.create(ChatColor.RED + "更新中...", updatingLoc);
         holo.display(p);
 
-        displayRanking(displayTypeMap.getOrDefault(p, DisplayType.DAILY), holo, p, ignoreCache);
+        displayRanking(displayTypeMap.getOrDefault(p, RankingType.DAILY), holo, p, ignoreCache);
     }
 
-    private void displayRanking(DisplayType type, Hologram holo, Player p, boolean ignoreCache) {
+    private void displayRanking(RankingType type, Hologram holo, Player p, boolean ignoreCache) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             long start = System.currentTimeMillis();
 
@@ -287,7 +290,7 @@ public class DisplayListener implements Listener {
         }
     }
 
-    private synchronized long updateData(DisplayType type, boolean ignoreCache) {
+    private synchronized long updateData(RankingType type, boolean ignoreCache) {
         long start = System.currentTimeMillis();
 
         // KDStatusReloadedがない場合は取得
@@ -313,16 +316,16 @@ public class DisplayListener implements Listener {
         }
     }
 
-    private String getFooter(DisplayType type) {
+    private String getFooter(RankingType type) {
         StringBuilder builder = new StringBuilder();
-        for (DisplayType type2 : DisplayType.values()) {
+        for (RankingType type2 : RankingType.values()) {
             if (type2 != type) {
                 builder.append(ChatColor.GRAY);
             } else {
-                builder.append(ChatColor.GREEN.toString()).append(ChatColor.BOLD.toString());
+                builder.append(ChatColor.GREEN).append(ChatColor.BOLD);
             }
 
-            builder.append(type2.toString().substring(0, 1)).append(type2.toString().substring(1).toLowerCase()).append(" ");
+            builder.append(type2.toString().charAt(0)).append(type2.toString().substring(1).toLowerCase()).append(" ");
         }
 
         return builder.toString().trim();
@@ -338,14 +341,11 @@ public class DisplayListener implements Listener {
         // 代入
         kdsPlugin = (KDStatusReloaded) pl;
         // 無効化されていたらreturn false
-        if (!kdsPlugin.isEnabled()) {
-            return false;
-        }
-        return true;
+        return kdsPlugin.isEnabled();
     }
 
-    private DisplayType getNext(DisplayType type) {
-        List<DisplayType> values = Arrays.asList(DisplayType.values());
+    private RankingType getNext(RankingType type) {
+        List<RankingType> values = Arrays.asList(RankingType.values());
         if (type == null) {
             return values.get(1);
         }

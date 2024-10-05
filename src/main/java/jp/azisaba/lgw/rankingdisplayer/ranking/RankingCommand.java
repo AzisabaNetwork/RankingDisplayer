@@ -1,4 +1,4 @@
-package jp.azisaba.lgw.rankingdisplayer;
+package jp.azisaba.lgw.rankingdisplayer.ranking;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
