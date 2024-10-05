@@ -4,7 +4,6 @@ import com.google.common.base.Strings;
 import jp.azisaba.lgw.kdstatus.KDStatusReloaded;
 import jp.azisaba.lgw.kdstatus.sql.KillRankingData;
 import jp.azisaba.lgw.kdstatus.utils.TimeUnit;
-import jp.azisaba.lgw.rankingdisplayer.ranking.RankingDisplayer;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
 import jp.azisaba.lgw.rankingdisplayer.util.DateFormatUtils;
 import lombok.RequiredArgsConstructor;

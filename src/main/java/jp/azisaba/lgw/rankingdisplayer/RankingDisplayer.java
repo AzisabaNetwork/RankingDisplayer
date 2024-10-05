@@ -1,10 +1,10 @@
-package jp.azisaba.lgw.rankingdisplayer.ranking;
+package jp.azisaba.lgw.rankingdisplayer;
 
 import java.io.File;
 import java.util.UUID;
 
-import jp.azisaba.lgw.rankingdisplayer.DisplayListener;
-import jp.azisaba.lgw.rankingdisplayer.PluginConfig;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;

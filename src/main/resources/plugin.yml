@@ -1,5 +1,5 @@
 name: ${project.name}
-main: jp.azisaba.lgw.rankingdisplayer.ranking.RankingDisplayer
+main: jp.azisaba.lgw.rankingdisplayer.RankingDisplayer
 version: ${project.version}
 author: siloneco
 api-version: 1.16
