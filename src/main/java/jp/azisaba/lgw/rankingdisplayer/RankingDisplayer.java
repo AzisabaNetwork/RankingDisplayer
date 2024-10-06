@@ -35,8 +35,8 @@ public class RankingDisplayer extends JavaPlugin {
         // KDStatusReloaded API Setup
         KDSAPI.loadPlugin(getLogger());
 
-        // Setup cache
-        cache = new CacheManager(getLogger());
+        // Setup cacheManager's logger
+        CacheManager.getInstance().setLogger(getLogger());
 
         // Events
         listener = new DisplayListener(this);

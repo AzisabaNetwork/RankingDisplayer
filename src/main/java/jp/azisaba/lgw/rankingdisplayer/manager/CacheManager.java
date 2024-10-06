@@ -3,7 +3,9 @@ package jp.azisaba.lgw.rankingdisplayer.manager;
 import jp.azisaba.lgw.kdstatus.sql.KillRankingData;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingType;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -16,9 +18,16 @@ import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 public class CacheManager {
-    private final Logger logger;
+    @Getter
+    private static final CacheManager Instance = new CacheManager();
+    @Setter
+    private Logger logger;
     private final long cacheHoldMilliSec = 1000 * 10;
-    private final HashMap<RankingType, List<KillRankingData>> cache = new HashMap<>();
+
+    private final HashMap<RankingType, List<KillRankingData>> killRankingCache = new HashMap<>();
+    private final HashMap<UUID, Integer> playerRankingCache = new HashMap<>();
+    private final HashMap<UUID, Integer> playerKillCountCache = new HashMap<>();
+
     private final HashMap<RankingType, Long> lastUpdated = new HashMap<>();
 
     // TODO move this to config
@@ -41,7 +50,7 @@ public class CacheManager {
         if(dataList.isEmpty()) {
             logger.warning("Failed to get top kill ranking");
         } else {
-            cache.put(type, dataList);
+            killRankingCache.put(type, dataList);
         }
         lastUpdated.put(type, System.currentTimeMillis());
     }
@@ -53,7 +62,7 @@ public class CacheManager {
         boolean containsHim = false;
         
         if(isNeedToUpdateCache(type)) updateCache(type);
-        List<KillRankingData> dataList = cache.get(type);
+        List<KillRankingData> dataList = killRankingCache.get(type);
         int count = 0;
         for(KillRankingData data: dataList) {
             if(count >= RANKING_SIZE) {
