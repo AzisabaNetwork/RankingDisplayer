@@ -58,9 +58,9 @@ public class RankingDisplayer extends JavaPlugin {
         // Update all players holo
         // TODO remove this
         if (!Bukkit.getOnlinePlayers().isEmpty()) {
-            for ( Player p : Bukkit.getOnlinePlayers() ) {
+            for (Player p : Bukkit.getOnlinePlayers()) {
                 World world = p.getWorld();
-                if ( world == config.displayLocation.getWorld() ) {
+                if (world == config.displayLocation.getWorld()) {
                     listener.displayRankingForPlayerAsync(p, false);
                 }
             }
@@ -72,7 +72,7 @@ public class RankingDisplayer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if ( listener != null ) {
+        if (listener != null) {
             listener.removeAllBoards();
         }
 
@@ -94,21 +94,21 @@ public class RankingDisplayer extends JavaPlugin {
     private void convertSettingsFromLocalFile() {
         File file = new File(getDataFolder(), "HideFromRanking.yml");
 
-        if ( !file.exists() ) {
+        if (!file.exists()) {
             return;
         }
 
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
 
-        if ( conf.getConfigurationSection("") == null || conf.getConfigurationSection("").getKeys(false) == null ) {
+        if (conf.getConfigurationSection("") == null || conf.getConfigurationSection("").getKeys(false) == null) {
             return;
         }
 
-        for ( String key : conf.getConfigurationSection("").getKeys(false) ) {
+        for (String key : conf.getConfigurationSection("").getKeys(false)) {
             UUID uuid = null;
             try {
                 uuid = UUID.fromString(key);
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 Bukkit.getLogger().warning("Could not parse String \"" + key + "\"");
                 continue;
             }

@@ -21,11 +21,12 @@ public class KDSAPI {
 
     /**
      * This function needs to call when KDStatusReloaded was loaded or reloaded
+     *
      * @param logger info & error logger
      */
     public static void loadPlugin(Logger logger) {
         Plugin pl = Bukkit.getPluginManager().getPlugin("KDStatusReloaded");
-        if(pl != null) {
+        if (pl != null) {
             kdsPlugin = (KDStatusReloaded) pl;
             loaded = true;
             logger.info("Successfully to load KDStatusReloaded plugin instance");
@@ -37,34 +38,37 @@ public class KDSAPI {
 
     /**
      * CAUTION: Everytime run sql transaction.
+     *
      * @param playerUUID UUID of target player
-     * @param timeUnit TimeUnit of target ranking
+     * @param timeUnit   TimeUnit of target ranking
      * @return Ranking order of player. If plugin is not loaded, returns -1
      */
     public static int getPlayerRanking(UUID playerUUID, TimeUnit timeUnit) {
-        if(!loaded) return -1;
+        if (!loaded) return -1;
         return kdsPlugin.getKdDataContainer().getRanking(playerUUID, timeUnit);
     }
 
     /**
      * CAUTION: Automatically cached PlayerData by KDStatusReloaded.
+     *
      * @param targetPlayer Target player
-     * @param timeUnit TimeUnit of kill count
+     * @param timeUnit     TimeUnit of kill count
      * @return kill count of target player in timeUnit. If plugin is not loaded, returns -1
      */
     public static int getPlayerKills(Player targetPlayer, TimeUnit timeUnit) {
-        if(!loaded) return -1;
+        if (!loaded) return -1;
         return kdsPlugin.getKdDataContainer().getPlayerData(targetPlayer, true).getKills(timeUnit);
     }
 
     /**
      * CAUTION: Everytime run sql transaction.
+     *
      * @param timeUnit TimeUnit of ranking
      * @param MAX_SIZE Maximum size of kill ranking
      * @return List of {@link KillRankingData}. If plugin is not loaded, returns empty list
      */
-    public static  List<KillRankingData> getTopKillRanking(TimeUnit timeUnit, int MAX_SIZE) {
-        if(!loaded) return Collections.emptyList();
+    public static List<KillRankingData> getTopKillRanking(TimeUnit timeUnit, int MAX_SIZE) {
+        if (!loaded) return Collections.emptyList();
         return kdsPlugin.getKdDataContainer().getTopKillRankingData(timeUnit, MAX_SIZE);
     }
 }

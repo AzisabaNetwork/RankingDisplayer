@@ -49,7 +49,7 @@ public class RankingHolo {
     private static void setRankingLines(HologramPage targetPage, int maxSize, String timeUnitName) {
         targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), STATUS_HEADER));
         for (int i = 0; i < maxSize; i++) {
-            targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), getRankingLine(timeUnitName, i+1)));
+            targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), getRankingLine(timeUnitName, i + 1)));
         }
         targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), STATUS_FOOTER));
         targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), USER_STATUS.replace("{timeunit}", timeUnitName)));

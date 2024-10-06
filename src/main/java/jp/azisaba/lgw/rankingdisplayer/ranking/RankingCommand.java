@@ -1,10 +1,9 @@
 package jp.azisaba.lgw.rankingdisplayer.ranking;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class RankingCommand implements CommandExecutor {
 

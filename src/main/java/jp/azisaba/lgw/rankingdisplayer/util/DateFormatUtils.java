@@ -7,7 +7,6 @@ import java.util.Date;
  * 日付のフォーマットを行うクラス
  *
  * @author siloneco
- *
  */
 public class DateFormatUtils {
 
@@ -16,29 +15,29 @@ public class DateFormatUtils {
 //    }
 
     public static String format(Calendar cal) {
-        if ( cal.getTimeInMillis() >= 0 ) {
+        if (cal.getTimeInMillis() >= 0) {
             cal.add(Calendar.YEAR, -1970);
             cal.add(Calendar.HOUR, -9);
         }
         StringBuilder builder = new StringBuilder();
 
-        if ( cal.get(Calendar.YEAR) > 1 ) {
+        if (cal.get(Calendar.YEAR) > 1) {
             builder.append(cal.get(Calendar.YEAR) - 1).append("年");
         }
-        if ( cal.get(Calendar.MONTH) > 0 ) {
+        if (cal.get(Calendar.MONTH) > 0) {
             builder.append(cal.get(Calendar.MONTH) + 1).append("ヵ月");
         }
-        if ( cal.get(Calendar.DATE) > 1 ) {
+        if (cal.get(Calendar.DATE) > 1) {
             builder.append(cal.get(Calendar.DATE) - 1).append("日");
         }
 
-        if ( cal.get(Calendar.HOUR_OF_DAY) > 0 ) {
+        if (cal.get(Calendar.HOUR_OF_DAY) > 0) {
             builder.append(cal.get(Calendar.HOUR_OF_DAY)).append("時間");
         }
-        if ( cal.get(Calendar.MINUTE) > 0 ) {
+        if (cal.get(Calendar.MINUTE) > 0) {
             builder.append(cal.get(Calendar.MINUTE)).append("分");
         }
-        if ( cal.get(Calendar.SECOND) > 0 ) {
+        if (cal.get(Calendar.SECOND) > 0) {
             builder.append(cal.get(Calendar.SECOND)).append("秒");
         }
 
@@ -54,7 +53,7 @@ public class DateFormatUtils {
     public static String format(Date date1, Date date2) {
         Date max, min;
 
-        if ( date1.after(date2) ) {
+        if (date1.after(date2)) {
             max = date1;
             min = date2;
         } else {

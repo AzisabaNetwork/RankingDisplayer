@@ -23,7 +23,7 @@ public class HoloManager {
 
     public static boolean addHolo(Location holoLocation) {
         String _holoName = getHoloName(holoLocation);
-        if(lastUpdateMap.containsKey(_holoName)) {
+        if (lastUpdateMap.containsKey(_holoName)) {
             return false;
         }
         lastUpdateMap.put(_holoName, System.currentTimeMillis());
@@ -37,7 +37,7 @@ public class HoloManager {
     }
 
     public static void removeAllHolo() {
-        for(String key: lastUpdateMap.keySet()) {
+        for (String key : lastUpdateMap.keySet()) {
             removeHolo(key);
         }
     }

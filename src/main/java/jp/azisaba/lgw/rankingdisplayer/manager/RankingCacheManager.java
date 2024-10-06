@@ -33,8 +33,8 @@ public class RankingCacheManager {
     }
 
     public long getLastUpdateAgo(RankingType type) {
-        long from = lastUpdated.getOrDefault(type, (long)0);
-        if(from == 0) return 0;
+        long from = lastUpdated.getOrDefault(type, (long) 0);
+        if (from == 0) return 0;
         return from - System.currentTimeMillis();
     }
 
@@ -45,7 +45,7 @@ public class RankingCacheManager {
     private synchronized void updateCache(RankingType type) {
         List<KillRankingData> dataList = KDSAPI.getTopKillRanking(type.getKdStatusTimeUnit(), RANKING_SIZE);
         List<RankingData> parsedData = parseData(dataList);
-        if(parsedData.isEmpty()) {
+        if (parsedData.isEmpty()) {
             logger.warning("Failed to get top kill ranking");
         } else {
             rankingCache.put(type, parsedData);
@@ -54,7 +54,7 @@ public class RankingCacheManager {
     }
 
     public void loadRanking() {
-        for(RankingType t: RankingType.values()) {
+        for (RankingType t : RankingType.values()) {
             logger.info("Loading ranking of " + t.name().toLowerCase(Locale.ROOT));
             updateCache(t);
             logger.info("Loaded! ranking of " + t.name().toLowerCase(Locale.ROOT));
@@ -96,12 +96,12 @@ public class RankingCacheManager {
     }
 
     public String getKillRankingLine(RankingType type, int order, String targetPlayerName) {
-        if(RANKING_SIZE < order) {
+        if (RANKING_SIZE < order) {
             return null;
         }
-        if(isNeedToUpdateCache(type)) updateCache(type);
+        if (isNeedToUpdateCache(type)) updateCache(type);
         List<RankingData> d = rankingCache.get(type);
         if (d == null) return "what?";
-        return d.get(order-1).getLine(targetPlayerName);
+        return d.get(order - 1).getLine(targetPlayerName);
     }
 }

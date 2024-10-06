@@ -17,7 +17,7 @@ public class RankingHideManager {
     public static void setHiding(UUID uuid, boolean hide) {
         SettingsData data = PlayerSettings.getPlugin().getManager().getSettingsData(uuid);
 
-        if ( hide ) {
+        if (hide) {
             data.set(key, true);
         } else {
             data.set(key, null);

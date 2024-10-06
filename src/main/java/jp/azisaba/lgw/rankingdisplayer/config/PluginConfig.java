@@ -42,44 +42,44 @@ public class PluginConfig {
     }
 
     public void loadConfig() {
-        for ( Field field : getClass().getFields() ) {
+        for (Field field : getClass().getFields()) {
             ConfigOptions anno = field.getAnnotation(ConfigOptions.class);
 
-            if ( anno == null ) {
+            if (anno == null) {
                 continue;
             }
 
             String path = anno.path();
 
-            if ( conf.get(path) == null ) {
+            if (conf.get(path) == null) {
 
                 try {
 
-                    if ( anno.type() == OptionType.NONE ) {
+                    if (anno.type() == OptionType.NONE) {
                         conf.set(path, field.get(this));
-                    } else if ( anno.type() == OptionType.LOCATION ) {
+                    } else if (anno.type() == OptionType.LOCATION) {
                         Location loc = (Location) field.get(this);
 
                         conf.set(path, loc.getWorld().getName() + "," + loc.getX() + "," + loc.getY() + "," + loc.getZ()
                                 + "," + loc.getYaw() + "," + loc.getPitch());
-                    } else if ( anno.type() == OptionType.CHAT_FORMAT ) {
+                    } else if (anno.type() == OptionType.CHAT_FORMAT) {
 
                         String msg = (String) field.get(this);
                         conf.set(path, msg);
 
                         msg = ChatColor.translateAlternateColorCodes('&', msg);
                         field.set(this, msg);
-                    } else if ( anno.type() == OptionType.SOUND ) {
+                    } else if (anno.type() == OptionType.SOUND) {
                         conf.set(path, field.get(this).toString());
-                    } else if ( anno.type() == OptionType.LOCATION_LIST ) {
+                    } else if (anno.type() == OptionType.LOCATION_LIST) {
                         @SuppressWarnings("unchecked")
                         List<Location> locations = (List<Location>) field.get(this);
 
                         List<String> strs = new ArrayList<>();
 
-                        if ( !locations.isEmpty() ) {
+                        if (!locations.isEmpty()) {
 
-                            for ( Location loc : locations ) {
+                            for (Location loc : locations) {
                                 strs.add(loc.getWorld().getName() + "," + loc.getX() + "," + loc.getY() + ","
                                         + loc.getZ()
                                         + "," + loc.getYaw() + "," + loc.getPitch());
@@ -92,16 +92,16 @@ public class PluginConfig {
                     }
 
                     plugin.saveConfig();
-                } catch ( Exception e ) {
+                } catch (Exception e) {
                     Bukkit.getLogger().warning("Error: " + e.getMessage());
                     e.printStackTrace();
                 }
             } else {
 
                 try {
-                    if ( anno.type() == OptionType.NONE ) {
+                    if (anno.type() == OptionType.NONE) {
                         field.set(this, conf.get(path));
-                    } else if ( anno.type() == OptionType.LOCATION ) {
+                    } else if (anno.type() == OptionType.LOCATION) {
 
                         String[] strings = conf.getString(path).split(",");
                         Location loc = null;
@@ -110,43 +110,43 @@ public class PluginConfig {
                                     Double.parseDouble(strings[2]), Double.parseDouble(strings[3]));
                             loc.setYaw(Float.parseFloat(strings[4]));
                             loc.setPitch(Float.parseFloat(strings[5]));
-                        } catch ( Exception e ) {
+                        } catch (Exception e) {
                             // None
                         }
 
-                        if ( loc == null ) {
+                        if (loc == null) {
                             Bukkit.getLogger().warning("Error. " + path + " の値がロードできませんでした。");
                             continue;
                         }
 
                         field.set(this, loc);
-                    } else if ( anno.type() == OptionType.SOUND ) {
+                    } else if (anno.type() == OptionType.SOUND) {
 
                         String name = conf.getString(path);
                         Sound sound;
 
                         try {
                             sound = Sound.valueOf(name.toUpperCase());
-                        } catch ( Exception e ) {
+                        } catch (Exception e) {
                             Bukkit.getLogger().warning("Error. " + path + " の値がロードできませんでした。");
                             continue;
                         }
 
                         field.set(this, sound);
-                    } else if ( anno.type() == OptionType.CHAT_FORMAT ) {
+                    } else if (anno.type() == OptionType.CHAT_FORMAT) {
 
                         String unformatMessage = conf.getString(path);
 
                         unformatMessage = ChatColor.translateAlternateColorCodes('&', unformatMessage);
 
                         field.set(this, unformatMessage);
-                    } else if ( anno.type() == OptionType.LOCATION_LIST ) {
+                    } else if (anno.type() == OptionType.LOCATION_LIST) {
 
                         List<String> strList = conf.getStringList(path);
 
                         List<Location> locList = new ArrayList<>();
 
-                        for ( String str : strList ) {
+                        for (String str : strList) {
 
                             String[] strings = str.split(",");
                             Location loc = null;
@@ -155,11 +155,11 @@ public class PluginConfig {
                                         Double.parseDouble(strings[2]), Double.parseDouble(strings[3]));
                                 loc.setYaw(Float.parseFloat(strings[4]));
                                 loc.setPitch(Float.parseFloat(strings[5]));
-                            } catch ( Exception e ) {
+                            } catch (Exception e) {
                                 // None
                             }
 
-                            if ( loc == null ) {
+                            if (loc == null) {
                                 Bukkit.getLogger().warning("Error. " + path + " の " + str + "がロードできませんでした。");
                                 continue;
                             }
@@ -169,7 +169,7 @@ public class PluginConfig {
 
                         field.set(this, locList);
                     }
-                } catch ( Exception e ) {
+                } catch (Exception e) {
                     Bukkit.getLogger().warning("Error. " + e.getMessage());
                 }
             }
