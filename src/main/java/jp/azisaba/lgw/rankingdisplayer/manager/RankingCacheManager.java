@@ -4,7 +4,6 @@ import jp.azisaba.lgw.kdstatus.sql.KillRankingData;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingType;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
@@ -16,17 +15,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-@RequiredArgsConstructor
-public class CacheManager {
+public class RankingCacheManager {
     @Getter
-    private static final CacheManager Instance = new CacheManager();
+    private static final RankingCacheManager Instance = new RankingCacheManager();
     @Setter
     private Logger logger;
     private final long cacheHoldMilliSec = 1000 * 10;
 
     private final HashMap<RankingType, List<KillRankingData>> killRankingCache = new HashMap<>();
-    private final HashMap<UUID, Integer> playerRankingCache = new HashMap<>();
-    private final HashMap<UUID, Integer> playerKillCountCache = new HashMap<>();
 
     private final HashMap<RankingType, Long> lastUpdated = new HashMap<>();
 
