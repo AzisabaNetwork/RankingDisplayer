@@ -3,6 +3,7 @@ package jp.azisaba.lgw.rankingdisplayer;
 import java.io.File;
 import java.util.UUID;
 
+import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
 import org.bukkit.Bukkit;
@@ -17,22 +18,35 @@ public class RankingDisplayer extends JavaPlugin {
 
     private static PluginConfig config;
     private DisplayListener listener;
+    private CacheManager cache;
 
     @Override
     public void onEnable() {
 
+        // Migrate
         convertSettingsFromLocalFile();
 
+        // Config
         RankingDisplayer.config = new PluginConfig(this);
         RankingDisplayer.config.loadConfig();
 
+        // KDStatusReloaded API Setup
+        KDSAPI.loadPlugin(getLogger());
+
+        // Setup cache
+        cache = new CacheManager(getLogger());
+
+        // Events
         listener = new DisplayListener(this);
         Bukkit.getPluginManager().registerEvents(listener, this);
 
+        // Commands
         Bukkit.getPluginCommand("ranking").setExecutor(new RankingCommand());
         Bukkit.getPluginCommand("ranking").setPermissionMessage(ChatColor.RED + "権限がありません！");
 
-        if ( Bukkit.getOnlinePlayers().size() > 0 ) {
+        // Update all players holo
+        // TODO remove this
+        if (!Bukkit.getOnlinePlayers().isEmpty()) {
             for ( Player p : Bukkit.getOnlinePlayers() ) {
                 World world = p.getWorld();
                 if ( world == config.displayLocation.getWorld() ) {
@@ -41,6 +55,7 @@ public class RankingDisplayer extends JavaPlugin {
             }
         }
 
+        // Finish message
         Bukkit.getLogger().info(getName() + " enabled.");
     }
 
