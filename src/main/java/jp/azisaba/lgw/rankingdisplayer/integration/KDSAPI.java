@@ -40,6 +40,7 @@ public class KDSAPI {
      * @param playerUUID UUID of target player
      * @param timeUnit TimeUnit of target ranking
      * @return Ranking order of player. If plugin is not loaded, returns -1
+     * CAUTION: Everytime run sql transaction
      */
     public static int getPlayerRanking(UUID playerUUID, TimeUnit timeUnit) {
         if(!loaded) return -1;
@@ -51,6 +52,7 @@ public class KDSAPI {
      * @param targetPlayer Target player
      * @param timeUnit TimeUnit of kill count
      * @return kill count of target player in timeUnit. If plugin is not loaded, returns -1
+     * CAUTION: Automatically cached PlayerData by KDStatusReloaded
      */
     public static int getPlayerKills(Player targetPlayer, TimeUnit timeUnit) {
         if(!loaded) return -1;
@@ -62,6 +64,7 @@ public class KDSAPI {
      * @param timeUnit TimeUnit of ranking
      * @param MAX_SIZE Maximum size of kill ranking
      * @return List of {@link KillRankingData}. If plugin is not loaded, returns empty list
+     * CAUTION: Automatically cached PlayerData by KDStatusReloaded
      */
     public static  List<KillRankingData> getTopKillRanking(TimeUnit timeUnit, int MAX_SIZE) {
         if(!loaded) return Collections.emptyList();
