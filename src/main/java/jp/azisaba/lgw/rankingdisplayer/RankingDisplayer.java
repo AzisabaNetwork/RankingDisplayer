@@ -48,6 +48,13 @@ public class RankingDisplayer extends JavaPlugin {
         Bukkit.getPluginCommand("ranking").setExecutor(new RankingCommand());
         Bukkit.getPluginCommand("ranking").setPermissionMessage(ChatColor.RED + "権限がありません！");
 
+        Bukkit.getPluginCommand("rankingholo").setExecutor(new RankingHoloCommand());
+        Bukkit.getPluginCommand("rankingholo").setPermissionMessage(ChatColor.RED + "権限がありません！");
+
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            new KDSPlaceholderExpansion().register();
+        }
+
         // Update all players holo
         // TODO remove this
         if (!Bukkit.getOnlinePlayers().isEmpty()) {
