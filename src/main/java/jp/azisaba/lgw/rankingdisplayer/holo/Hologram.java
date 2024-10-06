@@ -1,15 +1,11 @@
-package jp.azisaba.lgw.rankingdisplayer;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+package jp.azisaba.lgw.rankingdisplayer.holo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  *

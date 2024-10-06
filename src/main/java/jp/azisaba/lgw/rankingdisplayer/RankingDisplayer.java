@@ -1,18 +1,20 @@
 package jp.azisaba.lgw.rankingdisplayer;
 
-import java.io.File;
-import java.util.UUID;
-
+import jp.azisaba.lgw.rankingdisplayer.config.PluginConfig;
+import jp.azisaba.lgw.rankingdisplayer.holo.DisplayListener;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
+import jp.azisaba.lgw.rankingdisplayer.manager.CacheManager;
+import jp.azisaba.lgw.rankingdisplayer.manager.RankingHideManager;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
-import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.md_5.bungee.api.ChatColor;
+import java.io.File;
+import java.util.UUID;
 
 public class RankingDisplayer extends JavaPlugin {
 

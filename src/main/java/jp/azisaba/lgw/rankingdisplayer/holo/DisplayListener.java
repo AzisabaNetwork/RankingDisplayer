@@ -1,10 +1,12 @@
-package jp.azisaba.lgw.rankingdisplayer;
+package jp.azisaba.lgw.rankingdisplayer.holo;
 
 import com.google.common.base.Strings;
 import jp.azisaba.lgw.kdstatus.KDStatusReloaded;
 import jp.azisaba.lgw.kdstatus.sql.KillRankingData;
 import jp.azisaba.lgw.kdstatus.utils.TimeUnit;
-import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
+import jp.azisaba.lgw.rankingdisplayer.RankingDisplayer;
+import jp.azisaba.lgw.rankingdisplayer.manager.RankingHideManager;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingType;
 import jp.azisaba.lgw.rankingdisplayer.util.DateFormatUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;

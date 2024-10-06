@@ -1,11 +1,10 @@
-package jp.azisaba.lgw.rankingdisplayer.ranking;
-
-import java.util.UUID;
-
-import org.bukkit.entity.Player;
+package jp.azisaba.lgw.rankingdisplayer.manager;
 
 import net.azisaba.playersettings.PlayerSettings;
 import net.azisaba.playersettings.util.SettingsData;
+import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class RankingHideManager {
 

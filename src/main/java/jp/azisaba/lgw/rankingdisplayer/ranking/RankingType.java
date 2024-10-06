@@ -1,9 +1,8 @@
-package jp.azisaba.lgw.rankingdisplayer;
-
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+package jp.azisaba.lgw.rankingdisplayer.ranking;
 
 import jp.azisaba.lgw.kdstatus.utils.TimeUnit;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum RankingType {

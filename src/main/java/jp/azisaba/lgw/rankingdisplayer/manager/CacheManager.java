@@ -1,8 +1,8 @@
-package jp.azisaba.lgw.rankingdisplayer;
+package jp.azisaba.lgw.rankingdisplayer.manager;
 
 import jp.azisaba.lgw.kdstatus.sql.KillRankingData;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
-import jp.azisaba.lgw.rankingdisplayer.ranking.RankingHideManager;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;

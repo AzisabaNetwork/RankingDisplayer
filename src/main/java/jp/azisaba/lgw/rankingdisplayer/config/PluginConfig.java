@@ -1,4 +1,11 @@
-package jp.azisaba.lgw.rankingdisplayer;
+package jp.azisaba.lgw.rankingdisplayer.config;
+
+import jp.azisaba.lgw.rankingdisplayer.RankingDisplayer;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,12 +14,6 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public class PluginConfig {
 
