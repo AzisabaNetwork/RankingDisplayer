@@ -3,7 +3,7 @@ package jp.azisaba.lgw.rankingdisplayer;
 import jp.azisaba.lgw.rankingdisplayer.config.PluginConfig;
 import jp.azisaba.lgw.rankingdisplayer.holo.DisplayListener;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
-import jp.azisaba.lgw.rankingdisplayer.manager.CacheManager;
+import jp.azisaba.lgw.rankingdisplayer.manager.RankingCacheManager;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingHideManager;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
 import net.md_5.bungee.api.ChatColor;
@@ -20,7 +20,6 @@ public class RankingDisplayer extends JavaPlugin {
 
     private static PluginConfig config;
     private DisplayListener listener;
-    private CacheManager cache;
 
     @Override
     public void onEnable() {
@@ -36,7 +35,7 @@ public class RankingDisplayer extends JavaPlugin {
         KDSAPI.loadPlugin(getLogger());
 
         // Setup cacheManager's logger
-        CacheManager.getInstance().setLogger(getLogger());
+        RankingCacheManager.getInstance().setLogger(getLogger());
 
         // Events
         listener = new DisplayListener(this);
