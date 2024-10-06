@@ -6,7 +6,12 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
+
 public class KDSPlaceholderExpansion extends PlaceholderExpansion {
+    /**
+     * Holds all placeholder names for KDStatusReloaded player data
+     */
     public static class Names {
         public static final String PLAYER_RANKING = "player_ranking";
         public static final String PLAYER_KILL_COUNT = "player_kill_count";
@@ -33,16 +38,23 @@ public class KDSPlaceholderExpansion extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
+        // Check prefix
         if(params.startsWith(getIdentifier() + "_")) {
             String name = params.split(getIdentifier() + "_")[1];
+
+            // === Handlers ===
+            // %rankingdisplay_player_ranking_{timeunit}%
             if(name.startsWith(Names.PLAYER_RANKING)) {
                 name = name.split(Names.PLAYER_RANKING + "_")[1];
-                RankingType type = RankingType.getType(name);
+                RankingType type = RankingType.getType(name.toLowerCase(Locale.ROOT));
                 if(type==null) return null;
                 return String.valueOf(KDSAPI.getPlayerRanking(player.getUniqueId(), type.getKdStatusTimeUnit()));
-            } else if (name.startsWith(Names.PLAYER_KILL_COUNT)) {
+            }
+
+            // %rankingdisplay_player_kill_count_{timeunit}%
+            if (name.startsWith(Names.PLAYER_KILL_COUNT)) {
                 name = name.split(Names.PLAYER_KILL_COUNT + "_")[1];
-                RankingType type = RankingType.getType(name);
+                RankingType type = RankingType.getType(name.toLowerCase(Locale.ROOT));
                 if(type==null) return null;
                 return String.valueOf(KDSAPI.getPlayerKills(player.getPlayer(), type.getKdStatusTimeUnit()));
             }
