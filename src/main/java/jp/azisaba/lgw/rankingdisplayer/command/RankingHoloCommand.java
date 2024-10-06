@@ -30,9 +30,11 @@ public class RankingHoloCommand implements CommandExecutor, TabCompleter {
                 case "remove":
                     if (args.length != 2) {
                         sender.sendMessage("/" + command.getName() + " remove <hologramName>");
+                        return true;
                     }
                     if (!HoloManager.getAllHoloNames().contains(args[1])) {
                         sender.sendMessage("This hologramName is invalid.");
+                        return true;
                     }
                     HoloManager.removeHolo(args[1]);
                     sender.sendMessage("Successfully to remove hologram (name:" + args[1] + ")");
