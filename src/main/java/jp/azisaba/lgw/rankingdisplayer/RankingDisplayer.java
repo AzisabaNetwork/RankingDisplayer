@@ -1,8 +1,10 @@
 package jp.azisaba.lgw.rankingdisplayer;
 
+import jp.azisaba.lgw.rankingdisplayer.command.RankingHoloCommand;
 import jp.azisaba.lgw.rankingdisplayer.config.PluginConfig;
 import jp.azisaba.lgw.rankingdisplayer.holo.DisplayListener;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
+import jp.azisaba.lgw.rankingdisplayer.integration.KDSPlaceholderExpansion;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingCacheManager;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingHideManager;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
@@ -36,6 +38,7 @@ public class RankingDisplayer extends JavaPlugin {
 
         // Setup cacheManager's logger
         RankingCacheManager.getInstance().setLogger(getLogger());
+        RankingCacheManager.getInstance().loadRanking();
 
         // Events
         listener = new DisplayListener(this);
