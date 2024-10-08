@@ -48,7 +48,6 @@ public class KDSPlaceholderExpansion extends PlaceholderExpansion {
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String name) {
         // Check prefix
-//        String name = params.split(getIdentifier() + "_")[1];
 
         // === Handlers ===
         // %rankingdisplay_kill_ranking_{timeUnitName}_{order}%
