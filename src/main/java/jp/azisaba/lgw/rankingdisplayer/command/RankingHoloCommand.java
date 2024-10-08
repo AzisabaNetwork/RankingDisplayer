@@ -1,6 +1,8 @@
 package jp.azisaba.lgw.rankingdisplayer.command;
 
 import jp.azisaba.lgw.rankingdisplayer.manager.HoloManager;
+import jp.azisaba.lgw.rankingdisplayer.manager.RankingCacheManager;
+import jp.azisaba.lgw.rankingdisplayer.ranking.RankingType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class RankingHoloCommand implements CommandExecutor, TabCompleter {
-    public static final List<String> modes = Arrays.asList("place", "remove", "remove-all", "list");
+    public static final List<String> modes = Arrays.asList("place", "remove", "remove-all", "list", "cache-update");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
@@ -46,6 +48,11 @@ public class RankingHoloCommand implements CommandExecutor, TabCompleter {
                 case "list":
                     Set<String> names = HoloManager.getAllHoloNames();
                     sender.sendMessage("Size: " + names.size());
+                    return true;
+                case "cache-update":
+                    for(RankingType type: RankingType.values()) {
+                        RankingCacheManager.getInstance().updateCache(type);
+                    }
                     return true;
             }
         }

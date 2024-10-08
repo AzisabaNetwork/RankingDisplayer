@@ -42,7 +42,7 @@ public class RankingCacheManager {
         return getLastUpdateAgo(type) >= cacheHoldMilliSec;
     }
 
-    private synchronized void updateCache(RankingType type) {
+    public synchronized void updateCache(RankingType type) {
         List<KillRankingData> dataList = KDSAPI.getTopKillRanking(type.getKdStatusTimeUnit(), RANKING_SIZE);
         List<RankingData> parsedData = parseData(dataList);
         if (parsedData.isEmpty()) {
