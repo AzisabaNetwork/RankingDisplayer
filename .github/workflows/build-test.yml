@@ -16,3 +16,7 @@ jobs:
       - run: java -version
       - run: mvn --version
       - run: mvn -B package
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.4.1
+        with:
+          path: /home/runner/work/RankingDisplayer/RankingDisplayer/target/
