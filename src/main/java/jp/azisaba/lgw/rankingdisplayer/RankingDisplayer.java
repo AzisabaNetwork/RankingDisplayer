@@ -2,12 +2,13 @@ package jp.azisaba.lgw.rankingdisplayer;
 
 import jp.azisaba.lgw.rankingdisplayer.command.RankingHoloCommand;
 import jp.azisaba.lgw.rankingdisplayer.config.PluginConfig;
+import jp.azisaba.lgw.rankingdisplayer.holo.DHListener;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSPlaceholderExpansion;
-import jp.azisaba.lgw.rankingdisplayer.manager.HoloManager;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingCacheManager;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingHideManager;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
+import jp.azisaba.lgw.rankingdisplayer.task.AfterWorldLoadTask;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class RankingDisplayer extends JavaPlugin {
 
     private static PluginConfig config;
-//    private DisplayListener listener;
+    private DHListener dhListener;
 
     @Override
     public void onEnable() {
@@ -42,12 +43,12 @@ public class RankingDisplayer extends JavaPlugin {
         RankingCacheManager.getInstance().setLogger(getLogger());
         RankingCacheManager.getInstance().loadRanking();
 
-        HoloManager.getAllHolo();
-        HoloManager.addHolo(RankingDisplayer.config.displayLocation);
-
         // Events
-//        listener = new DisplayListener(this);
-//        Bukkit.getPluginManager().registerEvents(listener, this);
+        dhListener = new DHListener();
+        Bukkit.getPluginManager().registerEvents(dhListener, this);
+
+        // Tasks
+        new AfterWorldLoadTask().runTaskLaterAsynchronously(this, 100);
 
         // Commands
         Bukkit.getPluginCommand("ranking").setExecutor(new RankingCommand());
@@ -59,17 +60,6 @@ public class RankingDisplayer extends JavaPlugin {
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new KDSPlaceholderExpansion().register();
         }
-
-        // Update all players holo
-        // TODO remove this
-//        if (!Bukkit.getOnlinePlayers().isEmpty()) {
-//            for (Player p : Bukkit.getOnlinePlayers()) {
-//                World world = p.getWorld();
-//                if (world == config.displayLocation.getWorld()) {
-//                    listener.displayRankingForPlayerAsync(p, false);
-//                }
-//            }
-//        }
 
         // Finish message
         Bukkit.getLogger().info(getName() + " enabled.");
