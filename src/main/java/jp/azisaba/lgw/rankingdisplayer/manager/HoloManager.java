@@ -3,10 +3,10 @@ package jp.azisaba.lgw.rankingdisplayer.manager;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.DecentHologramsAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
+import jp.azisaba.lgw.rankingdisplayer.RankingDisplayer;
 import jp.azisaba.lgw.rankingdisplayer.holo.RankingHolo;
 import org.bukkit.Location;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,17 +29,30 @@ public class HoloManager {
             return false;
         }
         lastUpdateMap.put(_holoName, System.currentTimeMillis());
+        if(DHAPI.getHologram(_holoName) != null) return false;
         Hologram holo = DHAPI.createHologram(_holoName, holoLocation, true);
         return RankingHolo.setRanking(holo);
     }
 
+    public static boolean placeFromConfig() {
+        return addHolo(RankingDisplayer.getPluginConfig().displayLocation);
+    }
+
     public static void getAllHolo() {
-        Collection<Hologram> holograms = DecentHologramsAPI.get().getHologramManager().getHolograms();
-        for(Hologram h: holograms) {
-            if(h.getId().startsWith(HOLO_PREFIX)) {
-                lastUpdateMap.put(h.getId(), System.currentTimeMillis());
+        Set<String> names = DecentHologramsAPI.get().getHologramManager().getHologramNames();
+        System.out.println("Names size: " + names.size());
+//        Collection<Hologram> holograms = DecentHologramsAPI.get().getHologramManager().getHolograms();
+        for(String n: names) {
+            if(n.startsWith(HOLO_PREFIX)) {
+                lastUpdateMap.put(n, System.currentTimeMillis());
             }
         }
+    }
+
+    public static void onLoad() {
+        clearCache();
+        getAllHolo();
+        placeFromConfig();
     }
 
     public static void removeHolo(String holoName) {
@@ -51,6 +64,10 @@ public class HoloManager {
         for (String key : lastUpdateMap.keySet()) {
             removeHolo(key);
         }
+    }
+
+    public static void clearCache() {
+        lastUpdateMap.clear();
     }
 
     public static Set<String> getAllHoloNames() {
