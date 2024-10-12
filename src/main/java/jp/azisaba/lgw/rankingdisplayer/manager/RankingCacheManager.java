@@ -35,7 +35,7 @@ public class RankingCacheManager {
     public long getLastUpdateAgo(RankingType type) {
         long from = lastUpdated.getOrDefault(type, (long) 0);
         if (from == 0) return 0;
-        return from - System.currentTimeMillis();
+        return System.currentTimeMillis() - from;
     }
 
     public boolean isNeedToUpdateCache(RankingType type) {
