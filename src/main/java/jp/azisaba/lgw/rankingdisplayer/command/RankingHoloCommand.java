@@ -50,7 +50,7 @@ public class RankingHoloCommand implements CommandExecutor, TabCompleter {
                     sender.sendMessage("Size: " + names.size());
                     return true;
                 case "cache-update":
-                    for(RankingType type: RankingType.values()) {
+                    for (RankingType type : RankingType.values()) {
                         RankingCacheManager.getInstance().updateCache(type);
                     }
                     return true;

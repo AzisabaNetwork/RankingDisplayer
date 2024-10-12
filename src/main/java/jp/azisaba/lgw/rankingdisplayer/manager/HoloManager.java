@@ -29,7 +29,7 @@ public class HoloManager {
             return false;
         }
         lastUpdateMap.put(_holoName, System.currentTimeMillis());
-        if(DHAPI.getHologram(_holoName) != null) return false;
+        if (DHAPI.getHologram(_holoName) != null) return false;
         Hologram holo = DHAPI.createHologram(_holoName, holoLocation, true);
         return RankingHolo.setRanking(holo);
     }
@@ -41,8 +41,8 @@ public class HoloManager {
     public static void getAllHolo() {
         Set<String> names = DecentHologramsAPI.get().getHologramManager().getHologramNames();
         System.out.println("Names size: " + names.size());
-        for(String n: names) {
-            if(n.startsWith(HOLO_PREFIX)) {
+        for (String n : names) {
+            if (n.startsWith(HOLO_PREFIX)) {
                 lastUpdateMap.put(n, System.currentTimeMillis());
             }
         }

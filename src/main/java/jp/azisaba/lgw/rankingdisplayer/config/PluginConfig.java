@@ -37,7 +37,8 @@ public class PluginConfig {
 //        updateButtonList.add(new Location(Bukkit.getWorld("world"), 621, 11, 99));
     }
 
-    public void additional() {}
+    public void additional() {
+    }
 
     public void loadConfig() {
         for (Field field : getClass().getFields()) {
