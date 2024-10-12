@@ -1,10 +1,12 @@
 package jp.azisaba.lgw.rankingdisplayer.manager;
 
 import eu.decentsoftware.holograms.api.DHAPI;
+import eu.decentsoftware.holograms.api.DecentHologramsAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import jp.azisaba.lgw.rankingdisplayer.holo.RankingHolo;
 import org.bukkit.Location;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,7 +15,7 @@ public class HoloManager {
     /**
      * Prefix of hologram's name
      */
-    private static final String HOLO_PREFIX = "killranking";
+    private static final String HOLO_PREFIX = "_ranking_kill";
 
     /**
      * Key: Location of hologram
@@ -29,6 +31,15 @@ public class HoloManager {
         lastUpdateMap.put(_holoName, System.currentTimeMillis());
         Hologram holo = DHAPI.createHologram(_holoName, holoLocation, true);
         return RankingHolo.setRanking(holo);
+    }
+
+    public static void getAllHolo() {
+        Collection<Hologram> holograms = DecentHologramsAPI.get().getHologramManager().getHolograms();
+        for(Hologram h: holograms) {
+            if(h.getId().startsWith(HOLO_PREFIX)) {
+                lastUpdateMap.put(h.getId(), System.currentTimeMillis());
+            }
+        }
     }
 
     public static void removeHolo(String holoName) {
