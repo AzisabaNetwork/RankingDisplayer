@@ -34,12 +34,10 @@ public class PluginConfig {
         conf = plugin.getConfig();
 
         displayLocation = new Location(Bukkit.getWorld("world"), 0, 0, 0);
-        updateButtonList.add(new Location(Bukkit.getWorld("world"), 621, 11, 99));
+//        updateButtonList.add(new Location(Bukkit.getWorld("world"), 621, 11, 99));
     }
 
-    public void additional() {
-
-    }
+    public void additional() {}
 
     public void loadConfig() {
         for (Field field : getClass().getFields()) {
