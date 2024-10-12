@@ -71,7 +71,8 @@ public class KDSPlaceholderExpansion extends PlaceholderExpansion {
             name = name.split(Names.PLAYER_RANKING + "_")[1];
             RankingType type = RankingType.getType(name.toLowerCase(Locale.ROOT));
             if (type == null) return null;
-            return String.valueOf(KDSAPI.getPlayerRanking(player.getUniqueId(), type.getKdStatusTimeUnit()));
+            int rank = KDSAPI.getPlayerRanking(player.getUniqueId(), type.getKdStatusTimeUnit());
+            return rank == -1 ? "-" : String.valueOf(rank);
         }
 
         // %rankingdisplay_player_kill_count_{timeunit}%
@@ -79,7 +80,8 @@ public class KDSPlaceholderExpansion extends PlaceholderExpansion {
             name = name.split(Names.PLAYER_KILL_COUNT + "_")[1];
             RankingType type = RankingType.getType(name.toLowerCase(Locale.ROOT));
             if (type == null) return null;
-            return String.valueOf(KDSAPI.getPlayerKills(player.getPlayer(), type.getKdStatusTimeUnit()));
+            int kills = KDSAPI.getPlayerKills(player.getPlayer(), type.getKdStatusTimeUnit());
+            return kills == -1 ? "-" : String.valueOf(kills);
         }
 
         // %rankingdisplay_last_update_{timeunit}%
@@ -88,7 +90,7 @@ public class KDSPlaceholderExpansion extends PlaceholderExpansion {
             RankingType type = RankingType.getType(name.toLowerCase(Locale.ROOT));
             if (type == null) return null;
             double n = Math.floor((double) RankingCacheManager.getInstance().getLastUpdateAgo(type) / 1000);
-            return n < 1 ? "今" : String.valueOf(n);
+            return n < 1 ? "今" : String.valueOf((int) n);
         }
         return null;
     }
