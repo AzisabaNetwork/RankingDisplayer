@@ -41,7 +41,6 @@ public class HoloManager {
     public static void getAllHolo() {
         Set<String> names = DecentHologramsAPI.get().getHologramManager().getHologramNames();
         System.out.println("Names size: " + names.size());
-//        Collection<Hologram> holograms = DecentHologramsAPI.get().getHologramManager().getHolograms();
         for(String n: names) {
             if(n.startsWith(HOLO_PREFIX)) {
                 lastUpdateMap.put(n, System.currentTimeMillis());
