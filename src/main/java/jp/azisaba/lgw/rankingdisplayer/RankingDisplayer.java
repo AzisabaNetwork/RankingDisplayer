@@ -2,17 +2,15 @@ package jp.azisaba.lgw.rankingdisplayer;
 
 import jp.azisaba.lgw.rankingdisplayer.command.RankingHoloCommand;
 import jp.azisaba.lgw.rankingdisplayer.config.PluginConfig;
-import jp.azisaba.lgw.rankingdisplayer.holo.DisplayListener;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSAPI;
 import jp.azisaba.lgw.rankingdisplayer.integration.KDSPlaceholderExpansion;
+import jp.azisaba.lgw.rankingdisplayer.manager.HoloManager;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingCacheManager;
 import jp.azisaba.lgw.rankingdisplayer.manager.RankingHideManager;
 import jp.azisaba.lgw.rankingdisplayer.ranking.RankingCommand;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -21,10 +19,14 @@ import java.util.UUID;
 public class RankingDisplayer extends JavaPlugin {
 
     private static PluginConfig config;
-    private DisplayListener listener;
+//    private DisplayListener listener;
 
     @Override
     public void onEnable() {
+        if(!Bukkit.getPluginManager().isPluginEnabled("KDStatusReloaded")) {
+            getLogger().severe("KDStatusReloaded is not loaded.");
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
 
         // Migrate
         convertSettingsFromLocalFile();
@@ -40,9 +42,12 @@ public class RankingDisplayer extends JavaPlugin {
         RankingCacheManager.getInstance().setLogger(getLogger());
         RankingCacheManager.getInstance().loadRanking();
 
+        HoloManager.getAllHolo();
+        HoloManager.addHolo(RankingDisplayer.config.displayLocation);
+
         // Events
-        listener = new DisplayListener(this);
-        Bukkit.getPluginManager().registerEvents(listener, this);
+//        listener = new DisplayListener(this);
+//        Bukkit.getPluginManager().registerEvents(listener, this);
 
         // Commands
         Bukkit.getPluginCommand("ranking").setExecutor(new RankingCommand());
@@ -57,14 +62,14 @@ public class RankingDisplayer extends JavaPlugin {
 
         // Update all players holo
         // TODO remove this
-        if (!Bukkit.getOnlinePlayers().isEmpty()) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                World world = p.getWorld();
-                if (world == config.displayLocation.getWorld()) {
-                    listener.displayRankingForPlayerAsync(p, false);
-                }
-            }
-        }
+//        if (!Bukkit.getOnlinePlayers().isEmpty()) {
+//            for (Player p : Bukkit.getOnlinePlayers()) {
+//                World world = p.getWorld();
+//                if (world == config.displayLocation.getWorld()) {
+//                    listener.displayRankingForPlayerAsync(p, false);
+//                }
+//            }
+//        }
 
         // Finish message
         Bukkit.getLogger().info(getName() + " enabled.");
@@ -72,9 +77,9 @@ public class RankingDisplayer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (listener != null) {
-            listener.removeAllBoards();
-        }
+//        if (listener != null) {
+//            listener.removeAllBoards();
+//        }
 
         Bukkit.getLogger().info(getName() + " disabled.");
     }
