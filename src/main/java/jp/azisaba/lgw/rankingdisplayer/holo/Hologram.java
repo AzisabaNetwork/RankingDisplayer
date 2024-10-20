@@ -1,20 +1,14 @@
-package jp.azisaba.lgw.rankingdisplayer;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+package jp.azisaba.lgw.rankingdisplayer.holo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Method;
+import java.util.*;
+
 /**
- *
  * @author siloneco version: 1.0.0
- *
  */
 public class Hologram {
 
@@ -52,7 +46,7 @@ public class Hologram {
             packetTeleport = Class.forName("net.minecraft.server." + version + "PacketPlayOutEntityTeleport");
             Class<?> entity = Class.forName("net.minecraft.server." + version + "Entity");
 
-            if ( versionNumber <= 8 ) {
+            if (versionNumber <= 8) {
                 nbtTagCompound = Class.forName("net.minecraft.server." + version + "NBTTagCompound");
             }
 
@@ -60,7 +54,7 @@ public class Hologram {
                     entity);
 
             ready = true;
-        } catch ( ClassNotFoundException e ) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -98,7 +92,7 @@ public class Hologram {
     }
 
     public String getLine(int line) {
-        if ( messages.size() <= line ) {
+        if (messages.size() <= line) {
             return null;
         }
 
@@ -109,14 +103,14 @@ public class Hologram {
     private final HashMap<Player, HoloComponent> holoMap = new HashMap<>();
 
     public void display(Player... players) {
-        for ( Player p : players ) {
+        for (Player p : players) {
 
-            if ( holoMap.containsKey(p) ) {
+            if (holoMap.containsKey(p)) {
                 continue;
             }
 
             Location loc = defaultLocation.clone();
-            if ( locMap.containsKey(p) ) {
+            if (locMap.containsKey(p)) {
                 loc = locMap.get(p);
             }
 
@@ -130,7 +124,7 @@ public class Hologram {
                 List<Object> armorStands = new ArrayList<>();
 
                 Collections.reverse(messages);
-                for ( String msg : messages ) {
+                for (String msg : messages) {
                     Object armorStandEntity = armorStand.getConstructor(world).newInstance(world.cast(wServer));
                     displayArmorStand(p, armorStandEntity, loc.add(0, space, 0), msg);
                     armorStands.add(armorStandEntity);
@@ -141,7 +135,7 @@ public class Hologram {
                 holoMap.put(p, comp);
 
                 Collections.reverse(messages);
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -149,8 +143,8 @@ public class Hologram {
 
     public void teleport(Location loc, Player... players) {
         loc = loc.clone();
-        for ( Player p : players ) {
-            if ( !holoMap.containsKey(p) ) {
+        for (Player p : players) {
+            if (!holoMap.containsKey(p)) {
                 continue;
             }
 
@@ -161,9 +155,9 @@ public class Hologram {
     }
 
     public void removeFrom(Player... players) {
-        for ( Player p : players ) {
+        for (Player p : players) {
 
-            if ( !holoMap.containsKey(p) ) {
+            if (!holoMap.containsKey(p)) {
                 continue;
             }
 
@@ -172,14 +166,14 @@ public class Hologram {
                 int[] ids = new int[idList.size()];
 
                 int count = 0;
-                for ( Integer i : idList ) {
+                for (Integer i : idList) {
                     ids[count] = i.intValue();
                     count++;
                 }
 
                 Object packet = packetDestroy.getConstructor(int[].class).newInstance(ids);
                 sendPacket(p, packet);
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 continue;
             }
@@ -189,7 +183,7 @@ public class Hologram {
     }
 
     public void removeAll() {
-        for ( Player p : holoMap.keySet() ) {
+        for (Player p : holoMap.keySet()) {
             removeFrom(p);
         }
     }
@@ -202,7 +196,7 @@ public class Hologram {
     private int displayArmorStand(Player p, Object armorStandEntity, Location loc, String msg) {
         try {
             Method setName;
-            if ( versionNumber >= 13 ) {
+            if (versionNumber >= 13) {
                 setName = armorStand.getMethod("setCustomName", iChatBaseComponent);
             } else {
                 setName = armorStand.getMethod("setCustomName", String.class);
@@ -210,14 +204,14 @@ public class Hologram {
             Method setNameVisible = armorStand.getMethod("setCustomNameVisible", boolean.class);
             Method invisible = armorStand.getMethod("setInvisible", boolean.class);
             Method marker = null;
-            if ( versionNumber >= 9 ) {
+            if (versionNumber >= 9) {
                 marker = armorStand.getMethod("setMarker", boolean.class);
             }
             Method small = armorStand.getMethod("setSmall", boolean.class);
             Method location = armorStand.getMethod("setLocation", double.class, double.class, double.class, float.class,
                     float.class);
 
-            if ( versionNumber <= 8 ) {
+            if (versionNumber <= 8) {
                 loc = loc.clone();
                 loc.subtract(0, 1, 0);
                 Object nbtTag = nbtTagCompound.getConstructor().newInstance();
@@ -227,14 +221,14 @@ public class Hologram {
                 Method setNBT = armorStand.getMethod("a", nbtTagCompound);
                 setNBT.invoke(armorStandEntity, nbtTag);
             }
-            if ( versionNumber >= 13 ) {
+            if (versionNumber >= 13) {
                 setName.invoke(armorStandEntity, chatComponentText.getConstructor(String.class).newInstance(msg));
             } else {
                 setName.invoke(armorStandEntity, msg);
             }
             setNameVisible.invoke(armorStandEntity, true);
             invisible.invoke(armorStandEntity, true);
-            if ( versionNumber >= 9 ) {
+            if (versionNumber >= 9) {
                 marker.invoke(armorStandEntity, true);
                 small.invoke(armorStandEntity, true);
             }
@@ -245,7 +239,7 @@ public class Hologram {
             sendPacket(p, packet);
 
             return (int) armorStand.getMethod("getId").invoke(armorStandEntity);
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -259,7 +253,7 @@ public class Hologram {
 
     public static Hologram create() {
 
-        if ( !ready ) {
+        if (!ready) {
             throw new IllegalStateException("Not ready yet or failed to initialize.");
         }
 
@@ -268,7 +262,7 @@ public class Hologram {
 
     public static Hologram create(String message) {
 
-        if ( !ready ) {
+        if (!ready) {
             throw new IllegalStateException("Not ready yet or failed to initialize.");
         }
 
@@ -277,7 +271,7 @@ public class Hologram {
 
     public static Hologram create(Location loc) {
 
-        if ( !ready ) {
+        if (!ready) {
             throw new IllegalStateException("Not ready yet or failed to initialize.");
         }
 
@@ -286,7 +280,7 @@ public class Hologram {
 
     public static Hologram create(String message, Location loc) {
 
-        if ( !ready ) {
+        if (!ready) {
             throw new IllegalStateException("Not ready yet or failed to initialize.");
         }
 
@@ -320,7 +314,7 @@ class HoloComponent {
     private final Player player;
 
     public static void init(Class<?> packetTeleport, Class<?> armorStand, Class<?> craftPlayer, Class<?> entityPlayer,
-            Class<?> playerConnection, Class<?> packetRaw, Class<?> entity) {
+                            Class<?> playerConnection, Class<?> packetRaw, Class<?> entity) {
         HoloComponent.packetTeleport = packetTeleport;
         HoloComponent.armorStand = armorStand;
         HoloComponent.craftPlayer = craftPlayer;
@@ -340,14 +334,14 @@ class HoloComponent {
         loc = loc.clone();
         Collections.reverse(entityArmorStandList);
 
-        for ( Object armorStandEntity : entityArmorStandList ) {
+        for (Object armorStandEntity : entityArmorStandList) {
             try {
                 armorStand.getMethod("setLocation", double.class, double.class, double.class, float.class, float.class)
                         .invoke(armorStandEntity, loc.getX(), loc.getY(), loc.getZ(), 0f, 0f);
 
                 Object packet = packetTeleport.getConstructor(entity).newInstance(armorStandEntity);
                 sendPacket(player, packet);
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -360,10 +354,10 @@ class HoloComponent {
     public List<Integer> armorStandIDList() {
         List<Integer> idList = new ArrayList<>();
 
-        for ( Object entityArmorStand : entityArmorStandList ) {
+        for (Object entityArmorStand : entityArmorStandList) {
             try {
                 idList.add((int) armorStand.getMethod("getId").invoke(entityArmorStand));
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
