@@ -1,4 +1,5 @@
 ## RankingDisplayer
 
-## Supported Placeholders (PlaceholderAPI)
-- Under construction...
+## Dependencies
+- PlaceHolderAPI
+- DecentHolograms
