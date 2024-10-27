@@ -12,6 +12,9 @@ commands:
   rankingholo:
     usage: /rankingholo <place|remove|remove-all|list>
     permission: rankingdisplayer.command.rankingholo
+  rankingdisplayer:
+    usage: /rankingdisplayer <reload>
+    permission: rankingdisplayer.command.rankingdisplayer
 permissions:
   rankingdisplayer.command.ranking:
     default: true

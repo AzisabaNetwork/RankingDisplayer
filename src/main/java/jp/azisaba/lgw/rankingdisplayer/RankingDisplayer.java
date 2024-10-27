@@ -1,5 +1,6 @@
 package jp.azisaba.lgw.rankingdisplayer;
 
+import jp.azisaba.lgw.rankingdisplayer.command.RankingDisplayerCommand;
 import jp.azisaba.lgw.rankingdisplayer.command.RankingHoloCommand;
 import jp.azisaba.lgw.rankingdisplayer.config.PluginConfig;
 import jp.azisaba.lgw.rankingdisplayer.holo.DHListener;
@@ -58,6 +59,9 @@ public class RankingDisplayer extends JavaPlugin {
         Bukkit.getPluginCommand("rankingholo").setExecutor(new RankingHoloCommand());
         Bukkit.getPluginCommand("rankingholo").setPermissionMessage(ChatColor.RED + "権限がありません！");
 
+        Bukkit.getPluginCommand("rankingdisplayer").setExecutor(new RankingDisplayerCommand(this));
+        Bukkit.getPluginCommand("rankingdisplayer").setPermissionMessage(ChatColor.RED + "権限がありません！");
+
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new KDSPlaceholderExpansion().register();
         }
@@ -72,11 +76,12 @@ public class RankingDisplayer extends JavaPlugin {
     }
 
     public void reloadPluginConfig() {
-
+        getLogger().info("Reloading plugin config...");
         reloadConfig();
 
         RankingDisplayer.config = new PluginConfig(this);
         RankingDisplayer.config.loadConfig();
+        getLogger().info("Successfully to reload plugin config!");
     }
 
     public static PluginConfig getPluginConfig() {
