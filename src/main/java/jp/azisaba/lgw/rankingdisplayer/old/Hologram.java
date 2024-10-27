@@ -1,4 +1,4 @@
-package jp.azisaba.lgw.rankingdisplayer.holo;
+package jp.azisaba.lgw.rankingdisplayer.old;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;

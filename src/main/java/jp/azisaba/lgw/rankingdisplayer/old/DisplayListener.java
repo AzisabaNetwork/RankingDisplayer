@@ -1,4 +1,4 @@
-package jp.azisaba.lgw.rankingdisplayer.holo;
+package jp.azisaba.lgw.rankingdisplayer.old;
 
 import com.google.common.base.Strings;
 import jp.azisaba.lgw.kdstatus.KDStatusReloaded;
