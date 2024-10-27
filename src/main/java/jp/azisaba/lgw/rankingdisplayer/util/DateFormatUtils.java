@@ -10,10 +10,7 @@ import java.util.Date;
  */
 public class DateFormatUtils {
 
-//    public static String format(long l) {
-//
-//    }
-
+    // TODO 年 の表示を修正
     public static String format(Calendar cal) {
         if (cal.getTimeInMillis() >= 0) {
             cal.add(Calendar.YEAR, -1970);
