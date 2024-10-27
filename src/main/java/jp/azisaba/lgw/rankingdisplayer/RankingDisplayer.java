@@ -27,6 +27,7 @@ public class RankingDisplayer extends JavaPlugin {
         if (!Bukkit.getPluginManager().isPluginEnabled("KDStatusReloaded")) {
             getLogger().severe("KDStatusReloaded is not loaded.");
             Bukkit.getPluginManager().disablePlugin(this);
+            return;
         }
 
         // Migrate
