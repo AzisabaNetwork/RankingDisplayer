@@ -180,9 +180,9 @@ public class PluginConfig {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface ConfigOptions {
-        public String path();
+        String path();
 
-        public OptionType type() default OptionType.NONE;
+        OptionType type() default OptionType.NONE;
     }
 
     public enum OptionType {

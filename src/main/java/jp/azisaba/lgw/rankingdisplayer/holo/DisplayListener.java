@@ -35,7 +35,7 @@ public class DisplayListener implements Listener {
 
     private final long cacheHoldMilliSec = 1000 * 10;
 
-    private static String HEADER = ChatColor.AQUA + Strings.repeat("=", 8) + " " + ChatColor.GOLD
+    private final static String HEADER = ChatColor.AQUA + Strings.repeat("=", 8) + " " + ChatColor.GOLD
             + "Kill Ranking " + ChatColor.AQUA + Strings.repeat("=", 8);
 
     private final HashMap<Player, Long> updatedTime = new HashMap<>();
@@ -206,12 +206,10 @@ public class DisplayListener implements Listener {
 
             long end = System.currentTimeMillis();
 
-            plugin.getLogger().info("Displayed " + type.toString() + " Ranking for " + p.getName() + " async ("
+            plugin.getLogger().info("Displayed " + type + " Ranking for " + p.getName() + " async ("
                     + (end - start - (endedSynchro - waitingSynchro) + rankingDataFetchTime) + "ms)");
 
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                processingPlayers.remove(p);
-            }, 0);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> processingPlayers.remove(p), 0);
         });
     }
 
@@ -281,7 +279,7 @@ public class DisplayListener implements Listener {
 
             int kills = kdsPlugin.getKdDataContainer().getPlayerData(p, true).getKills(unit);
 
-            String line = ChatColor.BLUE + "YOU" + ChatColor.RED + " » " + ChatColor.YELLOW + "" + rankingStr + "位 " +
+            String line = ChatColor.BLUE + "YOU" + ChatColor.RED + " » " + ChatColor.YELLOW + rankingStr + "位 " +
                     ChatColor.GOLD + p.getName() + ChatColor.RED + ": " + ChatColor.AQUA + kills + " kill(s)";
 
             if (RankingHideManager.isHiding(p.getUniqueId())) {
