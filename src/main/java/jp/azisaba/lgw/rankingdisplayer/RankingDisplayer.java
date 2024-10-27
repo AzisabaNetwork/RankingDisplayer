@@ -67,10 +67,6 @@ public class RankingDisplayer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-//        if (listener != null) {
-//            listener.removeAllBoards();
-//        }
-
         Bukkit.getLogger().info(getName() + " disabled.");
     }
 
