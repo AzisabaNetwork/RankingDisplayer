@@ -1,5 +1,6 @@
-package jp.azisaba.lgw.rankingdisplayer.holo;
+package jp.azisaba.lgw.rankingdisplayer.old;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,8 +13,8 @@ import java.util.*;
  */
 public class Hologram {
 
-    private static String version;
-    private static int versionNumber;
+    private static final String version;
+    private static final int versionNumber;
     private static Class<?> armorStand, spawnPacket, world, craftWorld, craftPlayer, iChatBaseComponent,
             chatComponentText, entityLiving, entityPlayer, playerConnection, packetRaw, nbtTagCompound, packetDestroy,
             packetTeleport;
@@ -79,14 +80,6 @@ public class Hologram {
         return defaultLocation;
     }
 
-    public void setSpace(double space) {
-        this.space = space;
-    }
-
-    public double getSpace() {
-        return space;
-    }
-
     public List<String> getLines() {
         return messages;
     }
@@ -99,7 +92,8 @@ public class Hologram {
         return messages.get(line);
     }
 
-    private double space = 0.3;
+    @Getter
+    private final double space = 0.3;
     private final HashMap<Player, HoloComponent> holoMap = new HashMap<>();
 
     public void display(Player... players) {
@@ -166,8 +160,8 @@ public class Hologram {
                 int[] ids = new int[idList.size()];
 
                 int count = 0;
-                for (Integer i : idList) {
-                    ids[count] = i.intValue();
+                for (int i : idList) {
+                    ids[count] = i;
                     count++;
                 }
 
