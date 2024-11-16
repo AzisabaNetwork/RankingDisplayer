@@ -26,7 +26,7 @@ public class DateFormatUtilsTest {
 
         // Execute
         testcases.forEach((timeMill, expectation) -> {
-            Calendar calendar = Calendar.getInstance();
+            Calendar calendar = new Calendar.Builder().setInstant(0).build();
             calendar.setTimeInMillis(timeMill);
             assertEquals(expectation, DateFormatUtils.format(calendar));
         });
