@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Tag(TestSize.SMALL)
+@Tag(TestSize.MEDIUM)
 public class DateFormatUtilsTest {
     @Test
     public void FormatCalenderBySingle() {
