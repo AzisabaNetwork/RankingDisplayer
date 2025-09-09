@@ -1,9 +1,10 @@
-name: ${project.name}
-main: jp.azisaba.lgw.rankingdisplayer.RankingDisplayer
-version: ${project.version}
+name: '${name}'
+main: net.azisaba.rankingdisplayer.RankingDisplayer
+version: '${version}'
 authors: [siloneco, sysnote8main]
 api-version: 1.16
-description: "Display kill ranking plugin"
+description: '${description}'
+website: '${websiteUrl}'
 depend: ["PlayerSettings", "KDStatusReloaded", "DecentHolograms"]
 commands:
   ranking:

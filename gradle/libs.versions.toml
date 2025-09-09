@@ -1,0 +1,41 @@
+[versions]
+# plugin
+shadow = "9.1.0"
+runPaper = "3.0.0"
+
+# library
+spigotApi = "1.16.5-R0.1-SNAPSHOT"
+configLib = "4.6.1"
+caffeine = "3.2.2"
+kdStatusReloaded = "2.1.0"
+playerSettings = "1.0.0"
+decentHolograms = "2.8.11"
+placeholderApi = "2.11.6"
+jspecify = "1.0.0"
+junit = "5.13.4"
+
+[plugins]
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+runPaper = { id = "xyz.jpenilla.run-paper", version.ref = "runPaper" }
+
+[libraries]
+# system
+spigotApi = { module = "org.spigotmc:spigot-api", version.ref = "spigotApi" }
+
+# config
+configLib = { module = "de.exlll:configlib-yaml", version.ref = "configLib" }
+
+# cache
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
+
+# plugin
+kdStatusReloaded = { module = "com.github.AzisabaNetwork:KDStatusReloaded", version.ref = "kdStatusReloaded" }
+playerSettings = { module = "com.github.AzisabaNetwork:PlayerSettings", version.ref = "playerSettings" }
+decentHolograms = { module = "com.github.decentsoftware-eu:decentholograms", version.ref = "decentHolograms" }
+placeholderApi = { module = "me.clip:placeholderapi", version.ref = "placeholderApi" }
+
+# check
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
+junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junitJupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
