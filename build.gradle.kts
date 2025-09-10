@@ -85,6 +85,22 @@ tasks {
     runServer {
         minecraftVersion("1.16.5")
         ignoreUnsupportedJvm()
+        downloadPlugins {
+            modrinth("decentholograms", libs.versions.decentHolograms.get())
+            modrinth("placeholderapi", libs.versions.placeholderApi.get())
+            github(
+                "AzisabaNetwork",
+                "PlayerSettings",
+                "v1.1.0",
+                "PlayerSettings.jar",
+            )
+//            github(
+//                "AzisabaNetwork",
+//                "KDStatusReloaded",
+//                libs.versions.kdStatusReloaded.get(),
+//                "KDStatusReloaded-${libs.versions.kdStatusReloaded.get()}-all.jar",
+//            )
+        }
     }
 
     compileJava {

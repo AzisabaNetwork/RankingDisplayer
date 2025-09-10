@@ -15,8 +15,8 @@ public class RankingHolo {
     public static final List<String> pageNames = Arrays.asList("Daily", "Monthly", "Total");
     private static final String STATUS_HEADER = ChatColor.AQUA + Strings.repeat("=", 8) + ChatColor.GOLD + " Kill Ranking " + ChatColor.AQUA + Strings.repeat("=", 8);
     private static final String STATUS_FOOTER = ChatColor.AQUA + Strings.repeat("=", 25);
-    private static final String USER_STATUS = ChatColor.BLUE + "YOU " + ChatColor.RED + ">> " + ChatColor.YELLOW + "%rankingdisplayer_player_ranking_{timeunit}%位 " + ChatColor.GOLD + "{player}" + ChatColor.RED + ": " + ChatColor.AQUA + "%rankingdisplayer_player_kill_count_{timeunit}%" + " kill(s)";
-    private static final String LAST_UPDATED = ChatColor.RED + "ランキング最終更新: " + ChatColor.GREEN + "%rankingdisplayer_last_update_{timeunit}%秒前";
+    private static final String USER_STATUS = ChatColor.BLUE + "YOU " + ChatColor.RED + ">> " + ChatColor.YELLOW + "%rankingdisplayer_playerranking_{timeunit}%位 " + ChatColor.GOLD + "{player}" + ChatColor.RED + ": " + ChatColor.AQUA + "%rankingdisplayer_playerkillcount_{timeunit}%" + " kill(s)";
+    private static final String LAST_UPDATED = ChatColor.RED + "ランキング最終更新: " + ChatColor.GREEN + "%rankingdisplayer_lastupdate_{timeunit}%秒前";
     private static final int RANKING_SIZE = 7;
 
     /**
@@ -51,6 +51,6 @@ public class RankingHolo {
         }
         targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), STATUS_FOOTER));
         targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), USER_STATUS.replace("{timeunit}", timeUnitName)));
-        targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), LAST_UPDATED.replace("{timeunit}", timeUnitName)));
+//        targetPage.addLine(new HologramLine(targetPage, targetPage.getNextLineLocation(), LAST_UPDATED.replace("{timeunit}", timeUnitName)));
     }
 }

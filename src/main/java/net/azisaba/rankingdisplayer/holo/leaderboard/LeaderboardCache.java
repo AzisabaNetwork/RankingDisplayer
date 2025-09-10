@@ -1,5 +1,6 @@
 package net.azisaba.rankingdisplayer.holo.leaderboard;
 
+import net.azisaba.kdstatusreloaded.KDStatusReloaded;
 import net.azisaba.kdstatusreloaded.api.KDSAPI;
 import net.azisaba.kdstatusreloaded.playerkd.model.KDUserData;
 import net.azisaba.rankingdisplayer.RankingDisplayer;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 public class LeaderboardCache {
     private static final int RANKING_SIZE = 7;
@@ -21,12 +23,13 @@ public class LeaderboardCache {
         updater = new BukkitRunnable() {
             @Override
             public void run() {
+                KDStatusReloaded.getPlugin().getLogger().info("Updating...");
                 doUpdate();
             }
         };
 
         // Update leaderboard every 30 seconds
-        updater.runTaskTimerAsynchronously(plugin, 1, 20 * 30);
+        updater.runTaskTimerAsynchronously(plugin, 10, 20*30);
     }
 
     public void shutdown() {
@@ -38,22 +41,29 @@ public class LeaderboardCache {
     }
 
     protected void doUpdate() {
+        Logger logger = KDStatusReloaded.getPlugin().getLogger();
         for (RankingType type : RankingType.values()) {
             List<KDUserData> topList = KDSAPI.getTops(type.killCountType, RANKING_SIZE);
+            logger.info("Processing for " + type.name() + " / size: " + topList.size());
 
             List<LeaderboardLineData> rankingList = new ArrayList<>();
+            logger.info("===== Result =====");
             for (int i = 0; i < RANKING_SIZE; i++) {
-                if (rankingList.size() >= i) {
+                if (topList.size() <= i) {
+                    logger.info(String.format("%d: %s", i+1, "なし"));
                     // If not available
                     rankingList.add(RankingEntryLine.getLine(
                             EMPTY_UUID,
+                            "",
                             i + 1,
                             -1
                     ));
                 } else {
                     KDUserData kdUserData = topList.get(i);
+                    logger.info(String.format("%d: %s", i+1, kdUserData.name));
                     rankingList.add(RankingEntryLine.getLine(
                             kdUserData.uuid,
+                            kdUserData.name,
                             i + 1,
                             type.getKill(kdUserData)
                     ));

@@ -33,27 +33,31 @@ public class RankingExpansion extends PlaceholderExpansion {
     public @Nullable String onRequest(OfflinePlayer player, @NonNull String name) {
 
         String[] args = name.split("_");
-        if (args.length < 3) return null;
+//        System.out.println("Got " + name);
+        if (args.length < 2) return null;
 
-        String type = args[1];
-        RankingType rankingType = RankingType.getType(args[2]);
+        String type = args[0];
+        RankingType rankingType = RankingType.getType(args[1]);
         if (rankingType == null) return null;
 
         switch (type) {
             // %rankingdisplay_killranking_{timeUnitName}_{order}%
             case Names.KILL_RANKING -> {
-                if (args.length != 4) return null;
+                if (args.length != 3) return null;
                 try {
-                    int order = Integer.parseInt(args[3]);
-                    return RankingDisplayer.getLeaderboardCache().getLines(rankingType).get(order).getLine(player.getUniqueId(), player.getName());
+                    int order = Integer.parseInt(args[2]);
+                    return RankingDisplayer.getLeaderboardCache().getLines(rankingType).get(order-1).getLine(player.getName());
                 } catch (NumberFormatException e) {
                     return null;
                 }
             }
+
             // %rankingdisplay_playerranking_{timeunit}%
             case Names.PLAYER_RANKING -> {
-                return "" + KDSAPI.getPlayerRanking(rankingType.killCountType, player.getUniqueId());
+                int rank = KDSAPI.getPlayerRanking(rankingType.killCountType, player.getUniqueId());
+                return "" + (rank == -1 ? "?": rank);
             }
+
             // %rankingdisplay_playerkillcount_{timeunit}%
             case Names.PLAYER_KILL_COUNT -> {
                 return "" + rankingType.getKill(KDSAPI.getPlayerData(player.getUniqueId()));

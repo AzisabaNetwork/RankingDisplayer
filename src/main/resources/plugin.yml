@@ -5,7 +5,7 @@ authors: [siloneco, sysnote8main]
 api-version: 1.16
 description: '${description}'
 website: '${websiteUrl}'
-depend: ["PlayerSettings", "KDStatusReloaded", "DecentHolograms"]
+depend: ["PlayerSettings", "KDStatusReloaded", "DecentHolograms", "PlaceholderAPI"]
 commands:
   ranking:
     usage: /ranking

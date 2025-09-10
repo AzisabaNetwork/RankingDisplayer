@@ -16,6 +16,17 @@ public class RDConfig {
 
     @Configuration
     public static class HoloConfig {
-        public Location displayLocation = new Location(Bukkit.getWorld("world"), 0, 0, 0);
+        public LocationData displayLocation = new LocationData("world", 0, 0, 0);
+    }
+
+    public record LocationData(
+            String worldName,
+            int x,
+            int y,
+            int z
+    ) {
+        public Location toLocation() {
+            return new Location(Bukkit.getWorld(worldName), x, y, z);
+        }
     }
 }

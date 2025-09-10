@@ -34,7 +34,7 @@ public class DHHoloManager {
     }
 
     public static boolean placeFromConfig() {
-        return addHolo(RankingDisplayer.getRdConfig().holo.displayLocation);
+        return addHolo(RankingDisplayer.getRdConfig().holo.displayLocation.toLocation());
     }
 
     public static void getAllHolo() {
