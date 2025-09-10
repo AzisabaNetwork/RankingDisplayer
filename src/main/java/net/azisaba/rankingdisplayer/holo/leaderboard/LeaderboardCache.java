@@ -23,7 +23,6 @@ public class LeaderboardCache {
         updater = new BukkitRunnable() {
             @Override
             public void run() {
-                KDStatusReloaded.getPlugin().getLogger().info("Updating...");
                 doUpdate();
             }
         };
