@@ -41,16 +41,12 @@ public class LeaderboardCache {
     }
 
     protected void doUpdate() {
-        Logger logger = KDStatusReloaded.getPlugin().getLogger();
         for (RankingType type : RankingType.values()) {
             List<KDUserData> topList = KDSAPI.getTops(type.killCountType, RANKING_SIZE);
-            logger.info("Processing for " + type.name() + " / size: " + topList.size());
 
             List<LeaderboardLineData> rankingList = new ArrayList<>();
-            logger.info("===== Result =====");
             for (int i = 0; i < RANKING_SIZE; i++) {
                 if (topList.size() <= i) {
-                    logger.info(String.format("%d: %s", i+1, "なし"));
                     // If not available
                     rankingList.add(RankingEntryLine.getLine(
                             EMPTY_UUID,
@@ -60,7 +56,6 @@ public class LeaderboardCache {
                     ));
                 } else {
                     KDUserData kdUserData = topList.get(i);
-                    logger.info(String.format("%d: %s", i+1, kdUserData.name));
                     rankingList.add(RankingEntryLine.getLine(
                             kdUserData.uuid,
                             kdUserData.name,
