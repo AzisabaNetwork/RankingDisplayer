@@ -94,12 +94,12 @@ tasks {
                 "v1.1.0",
                 "PlayerSettings.jar",
             )
-//            github(
-//                "AzisabaNetwork",
-//                "KDStatusReloaded",
-//                libs.versions.kdStatusReloaded.get(),
-//                "KDStatusReloaded-${libs.versions.kdStatusReloaded.get()}-all.jar",
-//            )
+            github(
+                "AzisabaNetwork",
+                "KDStatusReloaded",
+                libs.versions.kdStatusReloaded.get(),
+                "KDStatusReloaded-${libs.versions.kdStatusReloaded.get()}-all.jar",
+            )
         }
     }
 
