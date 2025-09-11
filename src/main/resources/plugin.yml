@@ -1,11 +1,11 @@
 name: '${name}'
 main: net.azisaba.rankingdisplayer.RankingDisplayer
 version: '${version}'
-authors: [siloneco, sysnote8main]
+authors: [ siloneco, sysnote8main ]
 api-version: 1.16
 description: '${description}'
 website: '${websiteUrl}'
-depend: ["PlayerSettings", "KDStatusReloaded", "DecentHolograms", "PlaceholderAPI"]
+depend: [ "PlayerSettings", "KDStatusReloaded", "DecentHolograms", "PlaceholderAPI" ]
 commands:
   ranking:
     usage: /ranking

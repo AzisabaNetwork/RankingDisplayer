@@ -46,7 +46,7 @@ public class RankingExpansion extends PlaceholderExpansion {
                 if (args.length != 3) return null;
                 try {
                     int order = Integer.parseInt(args[2]);
-                    return RankingDisplayer.getLeaderboardCache().getLines(rankingType).get(order-1).getLine(player.getName());
+                    return RankingDisplayer.getLeaderboardCache().getLines(rankingType).get(order - 1).getLine(player.getName());
                 } catch (NumberFormatException e) {
                     return null;
                 }
@@ -55,7 +55,7 @@ public class RankingExpansion extends PlaceholderExpansion {
             // %rankingdisplay_playerranking_{timeunit}%
             case Names.PLAYER_RANKING -> {
                 int rank = KDSAPI.getPlayerRanking(rankingType.killCountType, player.getUniqueId());
-                return "" + (rank == -1 ? "?": rank);
+                return "" + (rank == -1 ? "?" : rank);
             }
 
             // %rankingdisplay_playerkillcount_{timeunit}%

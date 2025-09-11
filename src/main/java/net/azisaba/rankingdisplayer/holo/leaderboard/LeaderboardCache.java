@@ -1,6 +1,5 @@
 package net.azisaba.rankingdisplayer.holo.leaderboard;
 
-import net.azisaba.kdstatusreloaded.KDStatusReloaded;
 import net.azisaba.kdstatusreloaded.api.KDSAPI;
 import net.azisaba.kdstatusreloaded.playerkd.model.KDUserData;
 import net.azisaba.rankingdisplayer.RankingDisplayer;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 
 public class LeaderboardCache {
     private static final int RANKING_SIZE = 7;
@@ -28,7 +26,7 @@ public class LeaderboardCache {
         };
 
         // Update leaderboard every 30 seconds
-        updater.runTaskTimerAsynchronously(plugin, 10, 20*30);
+        updater.runTaskTimerAsynchronously(plugin, 10, 20 * 30);
     }
 
     public void shutdown() {

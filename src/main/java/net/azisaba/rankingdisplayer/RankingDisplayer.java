@@ -97,7 +97,7 @@ public class RankingDisplayer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if(leaderboardCache != null) leaderboardCache.shutdown();
+        if (leaderboardCache != null) leaderboardCache.shutdown();
         PlayerRankCache.shutdown();
     }
 
