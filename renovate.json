@@ -1,14 +1,9 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>AzisabaNetwork/renovate-config"
   ],
-  "packageRules": [
-    {
-      "minimumReleaseAge": "7 days",
-      "automerge": true,
-      "matchPackageNames": [
-        "*"
-      ]
-    }
-  ]
+  "configMigration": true,
+  "minimumReleaseAge": "7 days",
+  "automerge": true
 }
