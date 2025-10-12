@@ -1,5 +1,11 @@
 {
   "extends": [
     "github>AzisabaNetwork/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "stabilityDays": 7,
+      "automerge": true
+    }
   ]
 }
