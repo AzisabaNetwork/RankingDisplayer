@@ -14,6 +14,14 @@
       ]
     },
     {
+      "groupName": "auto-update-plugins",
+      "automerge": true,
+      "matchPackageNames": [
+        "com.gradleup.shadow",
+        "xyz.jpenilla.run-paper"
+      ]
+    },
+    {
       "groupName": "auto-update-external",
       "automerge": true,
       "matchPackageNames": [
