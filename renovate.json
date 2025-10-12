@@ -5,5 +5,30 @@
   ],
   "configMigration": true,
   "minimumReleaseAge": "7 days",
-  "automerge": true
+  "packageRules": [
+    {
+      "groupName": "auto-update-junit",
+      "automerge": true,
+      "matchPackageNames": [
+        "org.junit:junit-bom"
+      ]
+    },
+    {
+      "groupName": "auto-update-external",
+      "automerge": true,
+      "matchPackageNames": [
+        "de.exlll:configlib-yaml",
+        "com.github.ben-manes.caffeine:caffeine",
+        "org.jspecify:jspecify"
+      ]
+    },
+    {
+      "groupName": "auto-update-internal",
+      "automerge": true,
+      "matchPackageNames": [
+        "com.github.AzisabaNetwork:KDStatusReloaded",
+        "com.github.AzisabaNetwork:PlayerSettings"
+      ]
+    }
+  ]
 }
