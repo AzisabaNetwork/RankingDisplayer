@@ -4,9 +4,11 @@
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": "*",
-      "stabilityDays": 7,
-      "automerge": true
+      "minimumReleaseAge": "7 days",
+      "automerge": true,
+      "matchPackageNames": [
+        "*"
+      ]
     }
   ]
 }
