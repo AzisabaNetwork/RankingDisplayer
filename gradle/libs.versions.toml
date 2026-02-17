@@ -5,7 +5,7 @@ runPaper = "3.0.2"
 
 # library
 spigotApi = "1.16.5-R0.1-SNAPSHOT"
-configLib = "4.8.0"
+configLib = "4.8.1"
 caffeine = "3.2.3"
 kdStatusReloaded = "2.2.0"
 playerSettings = "1.0.0"
