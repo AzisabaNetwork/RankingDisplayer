@@ -15,6 +15,7 @@ val plDescription: String by project
 repositories {
     mavenLocal()
     mavenCentral()
+    maven("https://repo.azisaba.net/repository/maven-public/")
     maven("https://jitpack.io/")
     maven("https://repo.maven.apache.org/maven2/")
     maven("https://oss.sonatype.org/content/groups/public/")

@@ -7,7 +7,7 @@ runPaper = "3.0.2"
 spigotApi = "1.16.5-R0.1-SNAPSHOT"
 configLib = "4.8.1"
 caffeine = "3.2.3"
-kdStatusReloaded = "2.3.0"
+kdStatusReloaded = "2.3.1"
 playerSettings = "1.0.0"
 decentHolograms = "2.8.11"
 placeholderApi = "2.11.7"
@@ -29,7 +29,7 @@ configLib = { module = "de.exlll:configlib-yaml", version.ref = "configLib" }
 caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
 
 # plugin
-kdStatusReloaded = { module = "com.github.AzisabaNetwork:KDStatusReloaded", version.ref = "kdStatusReloaded" }
+kdStatusReloaded = { module = "net.azisaba:KDStatusReloaded", version.ref = "kdStatusReloaded" }
 playerSettings = { module = "com.github.AzisabaNetwork:PlayerSettings", version.ref = "playerSettings" }
 decentHolograms = { module = "com.github.decentsoftware-eu:decentholograms", version.ref = "decentHolograms" }
 placeholderApi = { module = "me.clip:placeholderapi", version.ref = "placeholderApi" }
