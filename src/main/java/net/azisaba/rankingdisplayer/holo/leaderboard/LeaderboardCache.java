@@ -34,6 +34,7 @@ public class LeaderboardCache {
     }
 
     public List<LeaderboardLineData> getLines(RankingType type) {
+        if(!rankingCache.containsKey(type)) doUpdate();
         return rankingCache.get(type);
     }
 
