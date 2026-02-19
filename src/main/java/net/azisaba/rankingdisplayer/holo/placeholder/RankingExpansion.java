@@ -25,11 +25,6 @@ public class RankingExpansion extends PlaceholderExpansion {
     }
 
     @Override
-    public boolean persist() {
-        return true;
-    }
-
-    @Override
     public @Nullable String onRequest(OfflinePlayer player, @NonNull String name) {
 
         String[] args = name.split("_");
