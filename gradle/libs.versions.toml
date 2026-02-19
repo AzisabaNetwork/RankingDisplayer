@@ -1,18 +1,18 @@
 [versions]
 # plugin
-shadow = "9.2.2"
-runPaper = "3.0.1"
+shadow = "9.3.1"
+runPaper = "3.0.2"
 
 # library
 spigotApi = "1.16.5-R0.1-SNAPSHOT"
-configLib = "4.6.1"
-caffeine = "3.2.2"
+configLib = "4.8.1"
+caffeine = "3.2.3"
 kdStatusReloaded = "2.3.0"
 playerSettings = "1.0.0"
 decentHolograms = "2.8.11"
-placeholderApi = "2.11.6"
+placeholderApi = "2.11.7"
 jspecify = "1.0.0"
-junit = "6.0.0"
+junit = "6.0.2"
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
